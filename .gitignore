@@ -4,3 +4,5 @@ MoralGamesWeb/__pycache__
 MoralGamesApp/__init__.py
 MoralGamesApp/__pycache__
 MoralGamesApp/migrations
+
+db.sqlite3

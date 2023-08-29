@@ -9,5 +9,9 @@ contacto/__init__.py
 contacto/__pycache__
 contacto/migrations
 
+blog/__init__.py
+blog/__pycache__
+blog/migrations
+
 db.sqlite3
 .env

@@ -10,3 +10,4 @@ contacto/__pycache__
 contacto/migrations
 
 db.sqlite3
+.env

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
+# Create your models here - Creacion models
 class Post(models.Model):
     titulo = models.CharField(max_length=50)
     imagen = models.ImageField(upload_to='blog', null=True, blank=True)

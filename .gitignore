@@ -13,5 +13,9 @@ blog/__init__.py
 blog/__pycache__
 blog/migrations
 
+autenticacion/__init__.py
+autenticacion/__pycache__
+autenticacion/migrations
+
 db.sqlite3
 .env

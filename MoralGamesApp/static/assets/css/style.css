@@ -154,7 +154,8 @@ h6 {
 }
 
 #header #logo h1 span {
-  color: #f82249;
+  color: #fff;
+  ;
 }
 
 #header #logo h1 a,
@@ -280,6 +281,28 @@ h6 {
 .navbar li:hover>a {
   color: #fff;
 }
+
+.nav-link-custom {
+  display: flex;
+  align-items: center;
+  color: rgba(202, 206, 221, 0.8);
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  transition: 0.3s;
+  position: relative;
+  padding: 6px 4px;
+}
+
+.nav-link-custom:hover,
+.navbar .active,
+.navbar .active:focus,
+.navbar li:hover>a,
+.nav-link-custom.active {
+  color: #fff;
+}
+
 
 .navbar .dropdown ul {
   display: block;

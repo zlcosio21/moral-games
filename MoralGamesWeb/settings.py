@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'MoralGamesApp',
     'contacto',
     'blog',
+    'autenticacion',
 ]
 
 MIDDLEWARE = [

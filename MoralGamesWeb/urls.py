@@ -23,5 +23,6 @@ urlpatterns = [
     path('', include("MoralGamesApp.urls")),
     path('contacto/', include('contacto.urls')),
     path('blog/', include('blog.urls')),
+    path('autenticacion/', include('autenticacion.urls')),
     
 ]

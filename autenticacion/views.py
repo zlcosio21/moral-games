@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from validators import *
 from django.contrib import messages
 from django.contrib.auth import login
+from django.contrib.auth import authenticate
 
 # Email and password private
 load_dotenv()
@@ -41,3 +42,20 @@ def registro(request):
            return redirect("home")
 
     return render(request, "autenticacion/registro.html", {'messages': messages.get_messages(request)})
+
+def inicio_sesion(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+
+            return redirect("home")
+        
+        else:
+            messages.error(request, "La cuenta no existe, ingrese los datos nuevamente", extra_tags="account_not_exist")
+
+    return render(request, "autenticacion/inicio_sesion.html", {'messages': messages.get_messages(request)})

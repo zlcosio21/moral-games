@@ -5,8 +5,7 @@ import os
 from dotenv import load_dotenv
 from validators import *
 from django.contrib import messages
-from django.contrib.auth import login
-from django.contrib.auth import authenticate
+from django.contrib.auth import login, authenticate, logout
 
 # Email and password private
 load_dotenv()
@@ -59,3 +58,8 @@ def inicio_sesion(request):
             messages.error(request, "La cuenta no existe, ingrese los datos nuevamente", extra_tags="account_not_exist")
 
     return render(request, "autenticacion/inicio_sesion.html", {'messages': messages.get_messages(request)})
+
+def cerrar_sesion(request):
+    logout(request)
+
+    return redirect("home")

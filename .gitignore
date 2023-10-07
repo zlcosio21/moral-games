@@ -17,6 +17,10 @@ autenticacion/__init__.py
 autenticacion/__pycache__
 autenticacion/migrations
 
+inventario/__init__.py
+inventario/__pycache__
+inventario/migrations
+
 db.sqlite3
 .env
 __pycache__

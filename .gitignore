@@ -21,6 +21,10 @@ inventario/__init__.py
 inventario/__pycache__
 inventario/migrations
 
+tienda/__init__.py
+tienda/__pycache__
+tienda/migrations
+
 db.sqlite3
 .env
 __pycache__

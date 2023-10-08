@@ -7,7 +7,3 @@ def home(request):
 
 def servicios(request):
     return render(request, "MoralGamesApp/servicios.html")
-
-
-def tienda(request):
-    return render(request, "MoralGamesApp/tienda.html")

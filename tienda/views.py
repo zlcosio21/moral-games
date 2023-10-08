@@ -1,5 +1,8 @@
 from django.shortcuts import render
+from inventario.models import Genero, Plataforma, Videojuego
 
 # Create your views here.
 def tienda(request):
-    return render(request, "tienda/tienda.html")
+    videojuego = Videojuego.objects.all()
+
+    return render(request, "tienda/tienda.html", {"videojuegos":videojuego})

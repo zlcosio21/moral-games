@@ -14,6 +14,7 @@
   <!-- Favicons -->
   <link href="{% static 'assets/img/logo.ico' %}" rel="icon">
   <link href="{% static 'assets/img/logo.ico' %}" rel="apple-touch-icon">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
@@ -54,6 +55,16 @@
           {% endif %}
 
       </div>
+
+      {% if request.path == '/tienda/' %} <!-- Reemplaza '/tienda/' con la URL de tu página de tienda -->
+        <div class="search">
+            <input class="input-search" type="text" placeholder="Buscar">
+            <div class="btn-search">
+              <i class="fa fa-search"></i>
+            </div>
+      </div>
+      {% endif %}
+      
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         

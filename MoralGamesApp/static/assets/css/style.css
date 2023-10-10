@@ -213,13 +213,13 @@ h6 {
   padding-top: 20px;
   margin: 20px;
   background: url(../img/fondo_videojuego.jpg) top center !important;
-  font-size: 36px; /* Tamaño del texto */
+  font-size: 36px; 
   text-align: center;
   text-transform: uppercase;
-  padding: 20px; /* Espaciado interno del texto */
-  background: rgba(128, 0, 128, 0.5);; /* Color neon (verde) con opacidad */
-  box-shadow: 0 0 10px rgba(128, 0, 128, 1), 0 0 20px rgba(128, 0, 128, 1), 0 0 30px rgba(128, 0, 128, 1); /* Sombras de caja para el efecto neon */
-  animation: glow 1s infinite alternate; /* Animación para el efecto de parpadeo */
+  padding: 20px;
+  background: rgba(128, 0, 128, 0.5);; 
+  box-shadow: 0 0 10px rgba(128, 0, 128, 1), 0 0 20px rgba(128, 0, 128, 1), 0 0 30px rgba(128, 0, 128, 1);
+  animation: glow 1s infinite alternate;
 }
 
 #content-videogame {
@@ -246,6 +246,70 @@ h6 {
   .buy-tickets {
     margin: 0 15px 0 0;
   }
+}
+
+.search { 
+	position: absolute;
+	left: 46%;
+	top: 47%;
+	transform: translate(-50%,-50%);
+	padding: 10px;
+}
+
+.input-search {
+  outline: none;
+  box-sizing: border-box;
+  background: url(../img/fondo_contacto.jpg);
+  color: white !important;
+  height: 0px;
+  width: 0px;
+  padding: 15px 20px;
+  color: hsl(0, 0%, 0%);
+  border-radius: 50px;
+  font-size: 16px;
+  border: 1px solid black;
+  transition: all .7s ease;
+  margin-right:500px;
+}
+
+::placeholder {
+	color: grey;
+}
+
+.btn-search {
+  position: absolute;
+  right: 0px;
+  top: 6px;
+  width: 50px;
+  height: 40px;
+  background: #D50000;
+  line-height: 0px;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  transition: .5s;
+  left: -22px;
+}
+
+.btn-search i {
+  font-size: 20px;
+  color: white;
+  line-height: 80px;
+  margin-top: -20px;
+  transition: all .7s ease;
+}
+
+.search input {
+  width: 225px;
+  right: -250px;
+}
+
+.search:hover input {
+  right: 0;
+}
+
+.search:hover{
+	background: transparent;
 }
 
 /*--------------------------------------------------------------

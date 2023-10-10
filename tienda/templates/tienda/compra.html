@@ -5,12 +5,19 @@
 {% block content %}
 
 <section id="store" class="section-with-bg">
-  
   <div class="container" data-aos="fade-up">
 
-    <h1 style="color: white;">Nombre</h1>
+    <div style="display: flex; align-items: center;">
 
-    <iframe width="800px" height="500px" style="margin-bottom: 57px;" src="https://www.youtube.com/embed/{{video_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <iframe width="800px !important" height="500px" style="margin-bottom: 81px; margin-top: 50px;" src="https://www.youtube.com/embed/{{video_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="flex: 1; margin-right: 20px;"></iframe>
+
+      <div style="flex: 1; color: white !important; background-color: blueviolet; width: 400px; height: 500px; padding: 20px;    margin-bottom: 32px;">
+        <h1 style="color: white;">{{videojuego.nombre}}</h1>
+        <p style="color: white;">Descripción del videojuego...</p>
+        <a href="#" style="color: white;">Más información</a>
+      </div>
+  
+    </div>
 
   </div>
 </section>

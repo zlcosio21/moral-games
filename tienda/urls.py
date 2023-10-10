@@ -7,6 +7,6 @@ from django.conf.urls.static import static
 urlpatterns = [
 
     path('', views.tienda, name="tienda"),
-    path('compra/', views.compra, name="compra"),
+    path('compra/<str:videojuego>/', views.compra, name="compra"),
         
 ]

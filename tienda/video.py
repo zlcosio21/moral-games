@@ -1,21 +1,11 @@
-import os
-from googleapiclient.discovery import build
-from dotenv import load_dotenv
-
-load_dotenv()
-PASSWORD_API_KEY = os.getenv("PASSWORD_API_KEY")
-api_key = PASSWORD_API_KEY
-youtube = build('youtube', 'v3', developerKey=api_key)
+from youtubesearchpython import VideosSearch
 
 def video(videojuego):
-    search_response = youtube.search().list(
-        q=videojuego,
-        type="video",
-        part="id",
-        maxResults=1
-    ).execute()
+    search = VideosSearch(videojuego, limit=1)
+    results = search.result()
 
-    if 'items' in search_response:
-        video_id = search_response['items'][0]['id']['videoId']
+    if results["result"]:
+        full_link = results["result"][0]["link"]
+        video_id = full_link.split("v=")[1]
 
     return video_id

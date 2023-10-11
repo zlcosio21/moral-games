@@ -7,14 +7,29 @@
 <section id="store" class="section-with-bg">
   <div class="container" data-aos="fade-up">
 
-    <div style="display: flex; align-items: center;">
+    <div class="container-buy">
 
       <iframe width="800px !important" height="500px" style="margin-bottom: 81px; margin-top: 50px;" src="https://www.youtube.com/embed/{{video_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="flex: 1; margin-right: 20px;"></iframe>
 
-      <div style="flex: 1; color: white !important; background-color: blueviolet; width: 400px; height: 500px; padding: 20px;    margin-bottom: 32px;">
+      <div class="content-buy">
+        <a class="btn btn-success" id="success-buy" href="" >Añadir Carrito</a>
+        <a class="btn btn-success" id="success-buy" href="" >Comprar ${{videojuego.precio}}</a>
+
         <h1 style="color: white;">{{videojuego.nombre}}</h1>
-        <p style="color: white;">Descripción del videojuego...</p>
-        <a href="#" style="color: white;">Más información</a>
+
+        <p style="color: white;">{{videojuego.informacion}}</p>
+
+        <p>Plataformas:
+          {% for plataforma in videojuego.plataforma.all %}
+            |{{plataforma.nombre}}|
+          {% endfor %}
+        </p>
+
+        <p>Generos:
+          {% for genero in videojuego.genero.all %}
+            |{{genero.nombre}}|
+          {% endfor %}
+        </p>
       </div>
   
     </div>

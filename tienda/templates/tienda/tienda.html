@@ -19,19 +19,8 @@
               <img src="{{videojuego.imagen.url}}" alt="Hotel 1" class="img-fluid" id="img-videogames">
             </div>
             <div id="content-videogame">
-              <p>{{videojuego.nombre}} ${{videojuego.precio}}</p>
-              <p id="plataform-and-genre-videogame">
-                Plataformas - |
-                {% for plataforma in videojuego.plataforma.all %}
-                  {{plataforma.nombre}}|
-                {% endfor %}
-              </p>
-              <p id="plataform-and-genre-videogame">
-                Generos - |
-                {% for genero in videojuego.genero.all %}
-                  {{genero.nombre}}|
-                {% endfor %}
-              </p>
+              <p>{{videojuego.nombre}}</p>
+              <p>${{videojuego.precio}}</p>
               <a href="{% url 'compra' videojuego.nombre %}" class="btn btn-success">Comprar Videojuego</a>
             </div>
           </div>

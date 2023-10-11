@@ -4,31 +4,17 @@
 
 {% block content %}
 
-{% block header %}
-
-  <div class="form" class="php-email-form">
-
-    <form action="{% url 'tienda' %}" method="post" role="form" class="php-email-form">
-      {% csrf_token %}
-
-      <div class="search">
-        <input class="input-search" type="text" placeholder="Buscar" name="busqueda">
-        <div class="btn-search">
-          <a href="{% url 'tienda' %}"><i class="fa fa-search"></i></a>
-        </div>
-      </div>
-      
-    </form>
-
-  </div>
-
-{% endblock %}
-
 <section id="store" class="section-with-bg">
   
   <div class="container" data-aos="fade-up">
     <div class="section-header">
-      <h2 style="color: white;">Store Videogames</h2>
+      <h2 style="color: white;">
+        {% if videojuegos %}
+          SI HAYYYYY {{busqueda}}
+        {% else %}
+          LLORINDEL {{busqueda}}
+        {% endif %}
+      </h2>
     </div>
 
     <div class="row" data-aos="fade-up" data-aos-delay="100" id="videogame">
@@ -48,6 +34,7 @@
       {% endfor %}
     </div>
   </div>
+
 </section>
 
 {% endblock %}

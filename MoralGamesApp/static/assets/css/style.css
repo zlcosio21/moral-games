@@ -176,7 +176,7 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Buy Tickets
+# Store
 --------------------------------------------------------------*/
 .buy-tickets {
   color: #fff;
@@ -311,6 +311,30 @@ h6 {
 
 .search:hover{
 	background: transparent;
+}
+
+/*--------------------------------------------------------------
+# buys
+--------------------------------------------------------------*/
+.container-buy {
+  display: flex;
+  align-items: center;
+}
+
+.content-buy {
+  flex: 1;
+  color: white !important;
+  background: rgba(0, 81, 128, 0.5);
+  width: 400px;
+  height: 500px;
+  padding: 20px;
+  margin-bottom: 32px;
+  font-size: 18px;
+}
+
+#success-buy {
+  background-color:#687EFF;
+  margin-bottom: 20px;
 }
 
 /*--------------------------------------------------------------

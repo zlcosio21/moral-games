@@ -27,7 +27,7 @@ class Videojuego(models.Model):
     cantidad = models.PositiveIntegerField(null=False, validators=[MinValueValidator(1), MaxValueValidator(1000)])
     genero = models.ManyToManyField(Genero)
     plataforma = models.ManyToManyField(Plataforma)
-    informacion = models.CharField(max_length=500, null=True)
+    informacion = models.CharField(max_length=300, null=True)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

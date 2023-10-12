@@ -7,15 +7,16 @@
 <section id="store" class="section-with-bg">
   
   <div class="container" data-aos="fade-up">
-    <div class="section-header">
-      <h2 style="color: white;">
-        {% if videojuegos %}
-          SI HAYYYYY {{busqueda}}
-        {% else %}
-          LLORINDEL {{busqueda}}
-        {% endif %}
-      </h2>
-    </div>
+      {% if videojuegos %}
+        <div class="section-header">
+          <h2 style="color: white;">Se encontro:</h2>
+        </div>
+      {% else %}
+        <div class="section-header">
+          <h2 style="color: white;">No se encontraron Resultados <br><br><a href="{% url 'tienda' %}">Volver</a></h2>
+        </div>
+        <div style="margin-top: 471px;"></div>
+      {% endif %}
 
     <div class="row" data-aos="fade-up" data-aos-delay="100" id="videogame">
       {% for videojuego in videojuegos %}

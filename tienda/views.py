@@ -1,12 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from inventario.models import Genero, Plataforma, Videojuego
 import os
 from tienda.video import video
+from django.db.models import Q
 
 # Create your views here.
 def tienda(request):
-    videojuego = Videojuego.objects.all()
+    if request.method == "POST":
+        busqueda = request.POST.get("busqueda")
+        
+        videojuegos = Videojuego.objects.filter(
+            Q(nombre__icontains=busqueda) | 
+            Q(plataforma__nombre__icontains=busqueda) | 
+            Q(genero__nombre__icontains=busqueda)
+        ).distinct()
+      
+        if busqueda == " ":
+            return redirect("tienda")
+        
+        return render(request, "tienda/busqueda.html", {"videojuegos":videojuegos})
 
+    videojuego = Videojuego.objects.all()
     return render(request, "tienda/tienda.html", {"videojuegos":videojuego})
 
 def compra(request, videojuego):

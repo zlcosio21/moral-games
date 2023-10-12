@@ -250,10 +250,11 @@ h6 {
 
 .search { 
 	position: absolute;
-	left: 46%;
+	left: 43%;
 	top: 47%;
 	transform: translate(-50%,-50%);
 	padding: 10px;
+  width: 660px;
 }
 
 .input-search {

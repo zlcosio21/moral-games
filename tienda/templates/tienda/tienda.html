@@ -12,9 +12,9 @@
       {% csrf_token %}
 
       <div class="search">
-        <input class="input-search" type="text" placeholder="Buscar" name="busqueda">
+        <input class="input-search" type="text" placeholder="Buscar" name="busqueda" class="form-control" required>
         <div class="btn-search">
-          <a href="{% url 'tienda' %}"><i class="fa fa-search"></i></a>
+          <button type="submit" class="transparent-button"><i class="fa fa-search"></i></button>
         </div>
       </div>
       

@@ -229,4 +229,21 @@
     })
   });
 
+  document.addEventListener("DOMContentLoaded", function() {
+    var quantityInput = document.getElementById("quantity");
+    var incrementButton = document.getElementById("increment");
+    var decrementButton = document.getElementById("decrement");
+  
+    incrementButton.addEventListener("click", function() {
+      quantityInput.value = parseInt(quantityInput.value) + 1;
+    });
+  
+    decrementButton.addEventListener("click", function() {
+      var currentQuantity = parseInt(quantityInput.value);
+      if (currentQuantity > 1) {
+        quantityInput.value = currentQuantity - 1;
+      }
+    });
+  });
+
 })()

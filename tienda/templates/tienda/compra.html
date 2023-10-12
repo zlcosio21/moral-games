@@ -13,7 +13,7 @@
 
       <div class="content-buy">
         <a class="btn btn-success" id="success-buy" href="" >Añadir Carrito</a>
-        <a class="btn btn-success" id="success-buy" href="" >Comprar ${{videojuego.precio}}</a>
+        <a class="btn btn-success" id="success-buy" href="" >Comprar</a>
 
         <h1 style="color: white;">{{videojuego.nombre}}</h1>
 
@@ -30,6 +30,11 @@
             |{{genero.nombre}}|
           {% endfor %}
         </p>
+
+        <input type="number" id="cantidad" name="quantity" value="1" min="1" style="width: 80px; background-color: #687EFF" class="btn btn-sm btn-success">
+        <button id="incrementar" class="btn btn-sm btn-success" style="width: 100px; background-color: #687EFF">+</button>
+        <button id="decrementar" class="btn btn-sm btn-success" style="width: 100px; background-color: #687EFF">-</button>
+        
       </div>
   
     </div>

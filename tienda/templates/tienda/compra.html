@@ -9,32 +9,37 @@
 
     <div class="container-buy">
 
-      <iframe width="800px !important" height="500px" style="margin-bottom: 81px; margin-top: 50px;" src="https://www.youtube.com/embed/{{video_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="flex: 1; margin-right: 20px;"></iframe>
+      <iframe width="800px !important" height="550px" style="margin-bottom: 79px; margin-top: 2px;" src="https://www.youtube.com/embed/{{video_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="flex: 1; margin-right: 20px;"></iframe>
 
       <div class="content-buy">
-        <a class="btn btn-success" id="success-buy" href="" >Añadir Carrito</a>
-        <a class="btn btn-success" id="success-buy" href="" >Comprar</a>
+        <form action="{% url 'compra' videojuego.nombre %}" method="post" role="form">
 
-        <h1 style="color: white;">{{videojuego.nombre}}</h1>
+          <a class="btn btn-success" id="success-buy" href="" >Añadir Carrito</a>
+          <button id="incrementar" type="submit" class="transparent-button"><a class="btn btn-success" id="success-buy" type="submit" >Comprar</a></button>
+          {% csrf_token %}
 
-        <p style="color: white;">{{videojuego.informacion}}</p>
+          <h1 style="color: white;">{{videojuego.nombre}}</h1>
 
-        <p>Plataformas:
-          {% for plataforma in videojuego.plataforma.all %}
-            |{{plataforma.nombre}}|
-          {% endfor %}
-        </p>
+          <p style="color: white;">{{videojuego.informacion}}</p>
 
-        <p>Generos:
-          {% for genero in videojuego.genero.all %}
-            |{{genero.nombre}}|
-          {% endfor %}
-        </p>
+          <p>Plataformas:
+            {% for plataforma in videojuego.plataforma.all %}
+              |{{plataforma.nombre}}|
+            {% endfor %}
+          </p>
 
-        <input type="number" id="cantidad" name="quantity" value="1" min="1" style="width: 80px; background-color: #687EFF" class="btn btn-sm btn-success">
-        <button id="incrementar" class="btn btn-sm btn-success" style="width: 100px; background-color: #687EFF">+</button>
-        <button id="decrementar" class="btn btn-sm btn-success" style="width: 100px; background-color: #687EFF">-</button>
-        
+          <p>Generos:
+            {% for genero in videojuego.genero.all %}
+              |{{genero.nombre}}|
+            {% endfor %}
+          </p>
+          
+          <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 80px; background-color: #687EFF" class="btn btn-sm btn-success">
+          <button id="increment" class="btn btn-sm btn-success" style="width: 100px; background-color: #687EFF">+</button>
+          <button id="decrement" class="btn btn-sm btn-success" style="width: 100px; background-color: #687EFF">-</button>
+
+        </form>
+
       </div>
   
     </div>

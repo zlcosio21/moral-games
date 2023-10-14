@@ -25,6 +25,11 @@ def tienda(request):
 
 def compra(request, videojuego):
     videojuego = Videojuego.objects.get(nombre__iexact=videojuego)
+
+    if request.method == "POST":
+        cantidad = request.POST.get("quantity")
+        total = (int(cantidad) * videojuego.precio)
+    
     nombre_videojuego = f"{videojuego.nombre} Official Trailer"
     video_url = video(nombre_videojuego)
 

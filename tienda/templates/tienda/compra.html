@@ -13,10 +13,21 @@
 
       <div class="content-buy">
         <form action="{% url 'compra' videojuego.nombre %}" method="post" role="form">
-
-          <a class="btn btn-success" id="success-buy" href="" >Añadir Carrito</a>
-          <button id="incrementar" type="submit" class="transparent-button"><a class="btn btn-success" id="success-buy" type="submit" >Comprar</a></button>
           {% csrf_token %}
+          <a class="btn btn-success" id="success-buy" href="" >Añadir Carrito</a>
+          <button class="btn btn-success" id="success-buy" type="submit">Comprar</button>
+
+          {% for message in messages %}
+            {% if 'stock_error' in message.tags and forloop.first %} <div style="text-align: left; color: red;"> 
+              {{ message }}</div>
+            {% endif %}
+          {% endfor %}
+
+          {% for message in messages %}
+            {% if 'buy_succesfull' in message.tags and forloop.first %} <div style="text-align: left; color: greenyellow;"> 
+              {{ message }}</div>
+            {% endif %}
+          {% endfor %}
 
           <h1 style="color: white;">{{videojuego.nombre}}</h1>
 
@@ -35,8 +46,8 @@
           </p>
           
           <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 80px; background-color: #687EFF" class="btn btn-sm btn-success">
-          <button id="increment" class="btn btn-sm btn-success" style="width: 100px; background-color: #687EFF">+</button>
-          <button id="decrement" class="btn btn-sm btn-success" style="width: 100px; background-color: #687EFF">-</button>
+          <button type="button" id="increment" class="btn btn-sm btn-success" class="button-buy" style="width: 100px; background-color: #687EFF">+</button>
+          <button type="button" id="decrement" class="btn btn-sm btn-success" style="width: 100px; background-color: #687EFF">-</button>
 
         </form>
 

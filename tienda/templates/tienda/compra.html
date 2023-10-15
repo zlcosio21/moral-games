@@ -35,17 +35,9 @@
 
           <p style="color: white;">{{videojuego.informacion}}</p>
 
-          <p>Plataformas:
-            {% for plataforma in videojuego.plataforma.all %}
-              |{{plataforma.nombre}}|
-            {% endfor %}
-          </p>
+          <p>Plataformas: {% for plataforma in videojuego.plataforma.all %} |{{plataforma.nombre}}| {% endfor %}</p>
 
-          <p>Generos:
-            {% for genero in videojuego.genero.all %}
-              |{{genero.nombre}}|
-            {% endfor %}
-          </p>
+          <p>Generos: {% for genero in videojuego.genero.all %} |{{genero.nombre}}| {% endfor %}</p>
           
           <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 80px; background-color: #687EFF" class="btn btn-sm btn-success">
           <button type="button" id="increment" class="btn btn-sm btn-success" class="button-buy" style="width: 100px; background-color: #687EFF">+</button>

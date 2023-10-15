@@ -44,6 +44,9 @@ def compra(request, videojuego):
             envio_email = EmailMessage("Mensaje desde MoralGames", f"El cliente {request.user}, a realizado la compra de {cantidad} copias de {videojuego.nombre}. El total de la compra es de ${total}", "", [EMAIL], reply_to=[request.user.email])
             envio_email.send()
 
+            videojuego.cantidad -= int(cantidad)
+            videojuego.save()
+
             messages.success(request, f"Compra realizada exitosamente, factura enviada a su correo", extra_tags="buy_succesfull")
     
     nombre_videojuego = f"{videojuego.nombre} Official Trailer"

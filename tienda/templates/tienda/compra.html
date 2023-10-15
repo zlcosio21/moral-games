@@ -15,7 +15,13 @@
         <form action="{% url 'compra' videojuego.nombre %}" method="post" role="form">
           {% csrf_token %}
           <a class="btn btn-success" id="success-buy" href="" >Añadir Carrito</a>
-          <button class="btn btn-success" id="success-buy" type="submit">Comprar</button>
+          
+          {% if user.is_authenticated %}
+            <button class="btn btn-success" id="success-buy" type="submit">Comprar</button>
+          {% else %}
+            <a class="btn btn-success" id="success-buy" href="{% url 'inicio_sesion' %}">Comprar</a>
+          {% endif %}
+
 
           {% for message in messages %}
             {% if 'stock_error' in message.tags and forloop.first %} <div style="text-align: left; color: red;"> 

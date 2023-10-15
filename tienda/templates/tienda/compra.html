@@ -22,19 +22,15 @@
             <a class="btn btn-success" id="success-buy" href="{% url 'inicio_sesion' %}">Comprar</a>
           {% endif %}
 
+          
+          {% for message in messages %} {% if 'stock_error' in message.tags and forloop.first %} 
+            <div style="text-align: left; color: red;">{{message}}</div>
+          {% endif %} {% endfor %}
 
-          {% for message in messages %}
-            {% if 'stock_error' in message.tags and forloop.first %} <div style="text-align: left; color: red;"> 
-              {{ message }}</div>
-            {% endif %}
-          {% endfor %}
-
-          {% for message in messages %}
-            {% if 'buy_succesfull' in message.tags and forloop.first %} <div style="text-align: left; color: greenyellow;"> 
-              {{ message }}</div>
-            {% endif %}
-          {% endfor %}
-
+          {% for message in messages %} {% if 'buy_succesfull' in message.tags and forloop.first %} 
+            <div style="text-align: left; color: greenyellow;">{{message}}</div>
+          {% endif %} {% endfor %}     
+              
           <h1 style="color: white;">{{videojuego.nombre}}</h1>
 
           <p style="color: white;">{{videojuego.informacion}}</p>

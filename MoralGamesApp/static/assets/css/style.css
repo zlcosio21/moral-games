@@ -989,6 +989,11 @@ h6 {
   transition: 0.3s ease-in-out;
 }
 
+.img-blog {
+  width: 414px;
+  height: 250px;
+}
+
 #hotels h3 {
   font-weight: 600;
   font-size: 20px;

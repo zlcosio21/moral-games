@@ -6,6 +6,7 @@ from django.db.models import Q
 from dotenv import load_dotenv
 from django.core.mail import send_mail, EmailMessage
 from django.contrib import messages
+from tienda.models import HistorialCompra
 
 # Email and password private
 load_dotenv()
@@ -46,6 +47,9 @@ def compra(request, videojuego):
 
             videojuego.cantidad -= int(cantidad)
             videojuego.save()
+
+            guardar_pedido = HistorialCompra.objects.create(usuario=request.user, videojuego=videojuego.nombre, cantidad=cantidad)
+            guardar_pedido.save()
 
             messages.success(request, f"Compra realizada exitosamente, factura enviada a su correo", extra_tags="buy_succesfull")
     

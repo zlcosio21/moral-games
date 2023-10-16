@@ -15,15 +15,15 @@ EMAIL = os.getenv("EMAIL")
 def tienda(request):
     if request.method == "POST":
         busqueda = request.POST.get("busqueda")
+
+        if busqueda == " ":
+            return redirect("tienda")
         
         videojuegos = Videojuego.objects.filter(
             Q(nombre__icontains=busqueda) | 
             Q(plataforma__nombre__icontains=busqueda) | 
             Q(genero__nombre__icontains=busqueda)
         ).distinct()
-      
-        if busqueda == " ":
-            return redirect("tienda")
         
         return render(request, "tienda/busqueda.html", {"videojuegos":videojuegos})
 

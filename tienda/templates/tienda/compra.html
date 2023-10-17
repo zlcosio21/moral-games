@@ -7,29 +7,38 @@
 <section id="store" class="section-with-bg">
   <div class="container" data-aos="fade-up">
 
+    <div style="display: flex;  flex-direction: row; align-items: flex-end;">
+      <form action="{% url 'compra' videojuego.nombre %}" method="post" role="form">
+        {% csrf_token %}
+        <button class="btn btn-success" id="success-buy" type="submit" style="margin-bottom: 0px;">Comprar</button>
+        <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 80px; background-color: #687EFF; margin-left: 20px;" class="btn btn-sm btn-success">
+        <button type="button" id="increment" class="btn btn-sm btn-success" class="button-buy" style="width: 100px; background-color: #687EFF">+</button>
+        <button type="button" id="decrement" class="btn btn-sm btn-success" style="width: 100px; background-color: #687EFF">-</button>
+
+      </form>
+      {% for message in messages %} {% if 'stock_error' in message.tags and forloop.first %} 
+        <div class="error-message">{{message}}</div>
+      {% endif %} {% endfor %}
+
+      {% for message in messages %} {% if 'buy_succesfull' in message.tags and forloop.first %} 
+        <div class="success-message">{{message}}</div>
+      {% endif %} {% endfor %}  
+
+    </div>
+
     <div class="container-buy">
 
-      <iframe width="800px !important" height="550px" style="margin-bottom: 79px; margin-top: 2px;" src="https://www.youtube.com/embed/{{video_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="flex: 1; margin-right: 20px;"></iframe>
+      <iframe width="800px !important" height="550px" style="margin-bottom: 41px; margin-top: 2px;" src="https://www.youtube.com/embed/{{video_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="flex: 1; margin-right: 20px;"></iframe>
 
       <div class="content-buy">
-        <form action="{% url 'compra' videojuego.nombre %}" method="post" role="form">
-          {% csrf_token %}
-          <a class="btn btn-success" id="success-buy" href="" >Añadir Carrito</a>
-          
+
+            <a class="btn btn-success" id="success-buy" href="#" >Añadir al Carrito</a>
           {% if user.is_authenticated %}
-            <button class="btn btn-success" id="success-buy" type="submit">Comprar</button>
+            <a class="btn btn-success" id="success-buy" href="#">Carrito</a>
           {% else %}
             <a class="btn btn-success" id="success-buy" href="{% url 'inicio_sesion' %}">Comprar</a>
+            <a class="btn btn-success" id="success-buy" href="{% url 'inicio_sesion' %}">Carrito</a>
           {% endif %}
-
-          
-          {% for message in messages %} {% if 'stock_error' in message.tags and forloop.first %} 
-            <div style="text-align: left; color: red;">{{message}}</div>
-          {% endif %} {% endfor %}
-
-          {% for message in messages %} {% if 'buy_succesfull' in message.tags and forloop.first %} 
-            <div style="text-align: left; color: greenyellow;">{{message}}</div>
-          {% endif %} {% endfor %}     
               
           <h1 style="color: white;">{{videojuego.nombre}}</h1>
 
@@ -38,12 +47,6 @@
           <p>Plataformas: {% for plataforma in videojuego.plataforma.all %} |{{plataforma.nombre}}| {% endfor %}</p>
 
           <p>Generos: {% for genero in videojuego.genero.all %} |{{genero.nombre}}| {% endfor %}</p>
-          
-          <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 80px; background-color: #687EFF" class="btn btn-sm btn-success">
-          <button type="button" id="increment" class="btn btn-sm btn-success" class="button-buy" style="width: 100px; background-color: #687EFF">+</button>
-          <button type="button" id="decrement" class="btn btn-sm btn-success" style="width: 100px; background-color: #687EFF">-</button>
-
-        </form>
 
       </div>
   

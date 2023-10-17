@@ -18,7 +18,7 @@ class HistorialCompra(models.Model):
     
 class Carrito(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    videojuego = models.ForeignKey(Videojuego, on_delete=models.CASCADE, unique=True)
+    videojuego = models.ForeignKey(Videojuego, on_delete=models.CASCADE)
     cantidad = models.PositiveSmallIntegerField(default=1)
 
     created = models.DateTimeField(auto_now_add=True)

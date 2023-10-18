@@ -32,11 +32,11 @@
 
       <div class="content-buy">
 
-            <a class="btn btn-success" id="success-buy" href="#" >Añadir al Carrito</a>
           {% if user.is_authenticated %}
-            <a class="btn btn-success" id="success-buy" href="#">Carrito</a>
+            <a class="btn btn-success" id="success-buy" href="{% url 'carrito' videojuego.nombre %}">Añadir al Carrito</a>
+            <a class="btn btn-success" id="success-buy" href="{% url 'carrito' videojuego.nombre %}">Carrito</a>
           {% else %}
-            <a class="btn btn-success" id="success-buy" href="{% url 'inicio_sesion' %}">Comprar</a>
+            <a class="btn btn-success" id="success-buy" href="{% url 'inicio_sesion' %}">Añadir al Carrito</a>
             <a class="btn btn-success" id="success-buy" href="{% url 'inicio_sesion' %}">Carrito</a>
           {% endif %}
               

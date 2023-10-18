@@ -25,6 +25,10 @@ tienda/__init__.py
 tienda/__pycache__
 tienda/migrations
 
+carrito/__init__.py
+carrito/__pycache__
+carrito/migrations
+
 db.sqlite3
 .env
 __pycache__

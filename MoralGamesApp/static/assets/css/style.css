@@ -363,6 +363,48 @@ h6 {
 }
 
 /*--------------------------------------------------------------
+# car
+--------------------------------------------------------------*/
+#car {
+  width: 100%;
+  background: url(../img/fondo_carrito.jpg) top center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: repeat;
+  overflow: hidden;
+  position: relative;
+  padding-top: 120px;
+}
+
+.container-car {
+  flex: 1;
+  color: white !important;
+  background: rgba(0, 81, 128, 0.5);
+  background: url(../img/fondo_videojuego_carrito.jpg) top center !important;
+  padding: 20px;
+  margin-bottom: 10px;
+  background: rgba(128, 0, 128, 0.5);; 
+  box-shadow: 0 0 10px rgba(128, 0, 128, 0.4), 0 0 20px rgba(128, 0, 128, 0.4), 0 0 30px rgba(128, 0, 128, 10.7);
+  animation: glow 1s infinite alternate;
+  margin-bottom: 50px;
+}
+
+.align-card-car {
+  display: flex; 
+  align-items: center;
+}
+
+.margin-card-car {
+  margin-left: 20px;
+}
+
+.button-buy-car {
+  width: 80px;
+  background-color:#687EFF; 
+  margin-right: 10px;
+}
+
+/*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
 /**

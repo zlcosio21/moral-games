@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Carrito(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    videojuego = models.CharField(max_length=75, unique=True)
+    videojuego = models.ForeignKey(Videojuego, on_delete=models.CASCADE)
     cantidad = models.PositiveSmallIntegerField(default=1)
 
     created = models.DateTimeField(auto_now_add=True)

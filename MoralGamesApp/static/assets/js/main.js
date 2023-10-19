@@ -230,20 +230,26 @@
   });
 
   document.addEventListener("DOMContentLoaded", function() {
-    var quantityInput = document.getElementById("quantity");
-    var incrementButton = document.getElementById("increment");
-    var decrementButton = document.getElementById("decrement");
+    var incrementButtons = document.querySelectorAll(".increment");
+    var decrementButtons = document.querySelectorAll(".decrement");
   
-    incrementButton.addEventListener("click", function() {
-      quantityInput.value = parseInt(quantityInput.value) + 1;
+    incrementButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        var quantityInput = button.nextElementSibling;
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+      });
     });
   
-    decrementButton.addEventListener("click", function() {
-      var currentQuantity = parseInt(quantityInput.value);
-      if (currentQuantity > 1) {
-        quantityInput.value = currentQuantity - 1;
-      }
+    decrementButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        var quantityInput = button.previousElementSibling;
+        var currentQuantity = parseInt(quantityInput.value);
+        if (currentQuantity > 1) {
+          quantityInput.value = currentQuantity - 1;
+        }
+      });
     });
   });
+  
 
 })()

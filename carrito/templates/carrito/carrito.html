@@ -36,6 +36,10 @@
       
     {% endfor %}
 
+    {% for message in messages %} {% if 'not_videogames_car' in message.tags and forloop.first %} 
+      <div class="success-message">{{message}}</div>
+    {% endif %} {% endfor %}
+    
     <div style="text-align: center;">
       <a href="#" class="btn btn-success" style="display: inline-block; margin-bottom: 25px;">Vaciar carrito</a>
     </div>

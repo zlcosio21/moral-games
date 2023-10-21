@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.validators import MinValueValidator,  MaxValueValidator
 
 # Create your models here.
 class Plataforma(models.Model):
@@ -23,8 +22,8 @@ class Genero(models.Model):
 class Videojuego(models.Model):
     nombre = models.CharField(unique=True, max_length=50, null=False)
     imagen = models.ImageField(upload_to='tienda', null=False)
-    precio = models.PositiveIntegerField(null=False, validators=[MinValueValidator(0), MaxValueValidator(1000)])
-    cantidad = models.PositiveIntegerField(null=False, validators=[MinValueValidator(1), MaxValueValidator(1000)])
+    precio = models.PositiveIntegerField(null=False)
+    cantidad = models.PositiveIntegerField(null=False)
     genero = models.ManyToManyField(Genero)
     plataforma = models.ManyToManyField(Plataforma)
     informacion = models.CharField(max_length=300, null=True)

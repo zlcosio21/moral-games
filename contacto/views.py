@@ -1,11 +1,6 @@
 from django.shortcuts import render, redirect
-from django.core.mail import send_mail, EmailMessage
-import os
-from dotenv import load_dotenv
-
-# Email and password private
-load_dotenv()
-EMAIL = os.getenv("EMAIL")
+from django.core.mail import EmailMessage
+from validators import EMAIL
 
 # Create your views here.
 def contacto(request):

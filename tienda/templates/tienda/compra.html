@@ -14,8 +14,8 @@
       <div class="content-buy">
 
         {% if user.is_authenticated %}
-          <a class="btn btn-success" id="success-buy" href="{% url 'carrito' videojuego.nombre %}">Añadir al Carrito</a>
-          <a class="btn btn-success" id="success-buy" href="{% url 'carrito' videojuego.nombre %}">Carrito</a>
+          <a class="btn btn-success" id="success-buy" href="{% url 'agregar_al_carrito' videojuego.nombre %}">Añadir al Carrito</a>
+          <a class="btn btn-success" id="success-buy" href="{% url 'carrito' %}">Carrito</a>
         {% else %}
           <a class="btn btn-success" id="success-buy" href="{% url 'inicio_sesion' %}">Añadir al Carrito</a>
           <a class="btn btn-success" id="success-buy" href="{% url 'inicio_sesion' %}">Carrito</a>
@@ -31,12 +31,11 @@
 
         <form action="{% url 'compra' videojuego.nombre %}" method="post" role="form">
           {% csrf_token %}
-          <button class="btn btn-success" id="success-buy" type="submit" style="margin-bottom: 0px;">Comprar</button>
 
-          <input type="number" id="quantity" name="quantity" value="1" min="1" style="width: 80px; background-color: #687EFF; margin-left: 20px;" class="btn btn-sm btn-success">
-          
-          <button type="button" id="increment" class="btn btn-sm btn-success" class="button-buy" style="width: 100px; background-color: #687EFF">+</button>
-          <button type="button" id="decrement" class="btn btn-sm btn-success" style="width: 100px; background-color: #687EFF">-</button>
+          <button class="btn btn-success" type="submit" style="margin-bottom: 0px;background-color: green; margin-right: 20px;">Comprar</button>
+          <button type="button" class="btn btn-sm btn-success increment" style="width: 80px; background-color: #687EFF; margin-right: 5px;">+</button>   
+          <input type="number" name="quantity" value="1" min="1" style="width: 60px; background-color: #687EFF; margin-right: 5px;" class="btn btn-sm btn-success quantity">
+          <button type="button" class="btn btn-sm btn-success decrement" style="width: 80px; background-color: #687EFF; margin-right: 5px;">-</button>
 
           {% for message in messages %} {% if 'stock_error' in message.tags and forloop.first %} 
             <div class="error-message">{{message}}</div>

@@ -1,5 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+EMAIL = os.getenv("EMAIL")
  
 def username_characters_error(request, *username):
     for user in username:

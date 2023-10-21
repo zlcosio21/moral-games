@@ -346,22 +346,19 @@ h6 {
   margin-bottom: 20px;
 }
 
-.error-message {
+.error-message-buy {
   text-align: left;
   color: red;
-  margin-left: 30px;
-  margin-bottom: 6px;
-  font-size: 20px;
+  font-size: 16px;
+  margin-top: 5px;
 }
 
-.success-message {
+.success-message-buy {
   text-align: left;
   color: greenyellow;
-  margin-left: 30px;
-  margin-bottom: 6px;
-  font-size: 20px;
+  font-size: 16px;
+  margin-top: 5px;
 }
-
 /*--------------------------------------------------------------
 # car
 --------------------------------------------------------------*/
@@ -402,6 +399,22 @@ h6 {
   width: 80px;
   background-color:#687EFF; 
   margin-right: 10px;
+}
+
+.error-message-car {
+  text-align: left;
+  color: red;
+  margin-left: 30px;
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
+.success-message-car {
+  text-align: left;
+  color: greenyellow;
+  margin-left: 30px;
+  margin-bottom: 6px;
+  font-size: 20px;
 }
 
 /*--------------------------------------------------------------

@@ -38,11 +38,11 @@
           <button type="button" class="btn btn-sm btn-success decrement" style="width: 80px; background-color: #687EFF; margin-right: 5px;">-</button>
 
           {% for message in messages %} {% if 'stock_error' in message.tags and forloop.first %} 
-            <div class="error-message">{{message}}</div>
+            <div class="error-message-buy">{{message}}</div>
           {% endif %} {% endfor %}
     
           {% for message in messages %} {% if 'buy_succesfull' in message.tags and forloop.first %} 
-            <div class="success-message">{{message}}</div>
+            <div class="success-message-buy">{{message}}</div>
           {% endif %} {% endfor %} 
             
         </form>

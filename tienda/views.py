@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from django.core.mail import send_mail, EmailMessage
 from django.contrib import messages
 from tienda.models import HistorialCompra
+from validators import stock_error
 
 # Email and password private
 load_dotenv()
@@ -37,21 +38,17 @@ def compra(request, videojuego):
     if request.method == "POST":
         cantidad = request.POST.get("quantity")
 
-        if int(cantidad) > videojuego.cantidad:
-            messages.error(request, f"Solo se encuentran disponibles {videojuego.cantidad} unidades del videojuego", extra_tags="stock_error")
-        else:
-            total = (int(cantidad) * videojuego.precio)
+        stock_error(request, cantidad, videojuego)
+
+        total = (int(cantidad) * videojuego.precio)
     
-            envio_email = EmailMessage("Mensaje desde MoralGames", f"El cliente {request.user}, a realizado la compra de {cantidad} copias de {videojuego.nombre}. El total de la compra es de ${total}", "", [EMAIL], reply_to=[request.user.email])
-            envio_email.send()
+        envio_email = EmailMessage("Mensaje desde MoralGames", f"El cliente {request.user}, a realizado la compra de {cantidad} copias de {videojuego.nombre}. El total de la compra es de ${total}", "", [EMAIL], reply_to=[request.user.email])
+        envio_email.send()
 
-            videojuego.cantidad -= int(cantidad)
-            videojuego.save()
+        guardar_pedido = HistorialCompra.objects.create(usuario=request.user, videojuego=videojuego.nombre, cantidad=cantidad)
+        guardar_pedido.save()
 
-            guardar_pedido = HistorialCompra.objects.create(usuario=request.user, videojuego=videojuego.nombre, cantidad=cantidad)
-            guardar_pedido.save()
-
-            messages.success(request, f"Compra realizada exitosamente, factura enviada a su correo", extra_tags="buy_succesfull")
+        messages.success(request, f"Compra realizada exitosamente, factura enviada a su correo", extra_tags="buy_succesfull")
     
     nombre_videojuego = f"{videojuego.nombre} Official Trailer"
     video_url = video(nombre_videojuego)

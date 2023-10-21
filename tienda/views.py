@@ -1,17 +1,11 @@
 from django.shortcuts import render, redirect
-from inventario.models import Genero, Plataforma, Videojuego
-import os
+from inventario.models import Videojuego
 from tienda.video import video
 from django.db.models import Q
-from dotenv import load_dotenv
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import EmailMessage
 from django.contrib import messages
 from tienda.models import HistorialCompra
-from validators import stock_error
-
-# Email and password private
-load_dotenv()
-EMAIL = os.getenv("EMAIL")
+from validators import stock_error, EMAIL
 
 # Create your views here.
 def tienda(request):
@@ -39,6 +33,9 @@ def compra(request, videojuego):
         cantidad = request.POST.get("quantity")
 
         stock_error(request, cantidad, videojuego)
+
+        if videojuego.cantidad < 1:
+            return redirect("compra", videojuego=videojuego.nombre)
 
         total = (int(cantidad) * videojuego.precio)
     

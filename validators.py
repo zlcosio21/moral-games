@@ -38,3 +38,14 @@ def isvalid(request, username, password, password_confirm):
         return True
     else:
         return False
+    
+def validator_stock(videojuego, cantidad):
+    if videojuego.cantidad >= int(cantidad):
+        videojuego.cantidad -= int(cantidad)
+        videojuego.save()
+
+def stock_error(request, cantidad, videojuego):
+    if videojuego.cantidad < int(cantidad) or videojuego.cantidad == 0:
+        return  messages.error(request, f"Solo se encuentran disponibles {videojuego.cantidad} unidades del videojuego", extra_tags="stock_error")
+    
+    validator_stock(videojuego, cantidad)

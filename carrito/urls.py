@@ -4,7 +4,8 @@ from django.conf import settings
 
 urlpatterns = [
 
-    path('carrito/<str:videojuego>/', views.carrito, name="carrito"),
-    path('vaciar_carrito', views.vaciar_carrito, name="vaciar_carrito"),
+    path('', views.carrito, name="carrito"),
+    path('agregar_al_carrito/<str:videojuego>/', views.agregar_al_carrito, name="agregar_al_carrito"),
+    path('vaciar_carrito/', views.vaciar_carrito, name="vaciar_carrito"),
         
 ]

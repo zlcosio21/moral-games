@@ -25,3 +25,13 @@ def vaciar_carrito(request):
         messages.success(request, "Se ha vaciado el carrito de compras", extra_tags="not_videogames_car")
 
     return render(request, "carrito/carrito.html", {"carrito":carrito})
+
+def eliminar_del_carrito(request, videojuego):
+    videojuego = Videojuego.objects.get(nombre=videojuego)
+
+    eliminar_del_carrito = Carrito.objects.get(videojuego=videojuego)
+    eliminar_del_carrito.delete()
+
+    carrito = Carrito.objects.filter(usuario=request.user)
+
+    return render(request, "carrito/carrito.html", {"carrito":carrito})

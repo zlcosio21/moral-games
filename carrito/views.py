@@ -27,10 +27,12 @@ def vaciar_carrito(request):
     return render(request, "carrito/carrito.html", {"carrito":carrito})
 
 def eliminar_del_carrito(request, videojuego):
-    videojuego = Videojuego.objects.get(nombre=videojuego)
-
-    eliminar_del_carrito = Carrito.objects.get(videojuego=videojuego)
-    eliminar_del_carrito.delete()
+    try:
+        videojuego = Videojuego.objects.get(nombre=videojuego)
+        eliminar_del_carrito = Carrito.objects.get(videojuego=videojuego)
+        eliminar_del_carrito.delete()
+    except Carrito.DoesNotExist:
+        pass
 
     carrito = Carrito.objects.filter(usuario=request.user)
 

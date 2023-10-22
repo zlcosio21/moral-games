@@ -417,6 +417,15 @@ h6 {
   font-size: 20px;
 }
 
+.delete-videogame-car {
+  color: white;
+  margin-bottom: -35px;
+  display: flex;
+  flex-direction: row-reverse;
+  font-family: "Raleway", sans-serif;
+  margin-right: 150px;
+}
+
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/

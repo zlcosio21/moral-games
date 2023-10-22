@@ -12,6 +12,8 @@
     </div>
 
     {% for item in carrito %}
+      <a class="delete-videogame-car" href="{% url 'eliminar_del_carrito' item.videojuego.nombre %}">Eliminar del carrito</a>
+
       <div class="container-car">
         <div class="align-card-car">
             
@@ -31,14 +33,9 @@
           </form>
           
         </div>
-
       </div>
       
     {% endfor %}
-
-    {% for message in messages %} {% if 'not_videogames_car' in message.tags and forloop.first %} 
-      <div class="success-message">{{message}}</div>
-    {% endif %} {% endfor %}
     
     <div style="text-align: center;">
       <a href="{% url 'vaciar_carrito' %}" class="btn btn-success" style="display: inline-block; margin-bottom: 25px;">Vaciar carrito</a>

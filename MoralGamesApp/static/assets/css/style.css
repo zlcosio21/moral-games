@@ -426,6 +426,24 @@ h6 {
   margin-right: 150px;
 }
 
+.cart {
+  position: absolute;
+  right: 96px; /* Ajusta la posición a tu preferencia */
+  top: 137px; /* Ajusta la posición a tu preferencia */
+}
+
+.cart .transparent-button {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.cart .transparent-button i {
+  font-size: 25px;
+  color: white; /* Color del icono del carrito */
+  line-height: 40px;
+}
+
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/

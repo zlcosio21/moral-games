@@ -18,6 +18,8 @@
           <form action="{% url 'agregar_al_carrito' videojuego.nombre %}" method="post" role="form">
             {% csrf_token %}
             
+            <div class="cart"><a class="transparent-button" href="{% url 'carrito' %}"><i class="fa fa-shopping-cart"></i></a></div>
+            
             <button type="submit" class="btn btn-sm btn-success" style="width: 150px; background-color: #687EFF; margin-right: 20px;">Añadir al carrito</button>   
             <button type="button" class="btn btn-sm btn-success increment" style="width: 80px; background-color: #687EFF; margin-right: 5px;">+</button>   
             <input type="number" name="quantity" value="1" min="1" style="width: 60px; background-color: #687EFF; margin-right: 5px;" class="btn btn-sm btn-success quantity">

@@ -14,14 +14,23 @@
       <div class="content-buy">
 
         {% if user.is_authenticated %}
-          <a class="btn btn-success" id="success-buy" href="{% url 'agregar_al_carrito' videojuego.nombre %}">Añadir al Carrito</a>
-          <a class="btn btn-success" id="success-buy" href="{% url 'carrito' %}">Carrito</a>
+
+          <form action="{% url 'agregar_al_carrito' videojuego.nombre %}" method="post" role="form">
+            {% csrf_token %}
+            
+            <button type="submit" class="btn btn-sm btn-success" style="width: 150px; background-color: #687EFF; margin-right: 20px;">Añadir al carrito</button>   
+            <button type="button" class="btn btn-sm btn-success increment" style="width: 80px; background-color: #687EFF; margin-right: 5px;">+</button>   
+            <input type="number" name="quantity" value="1" min="1" style="width: 60px; background-color: #687EFF; margin-right: 5px;" class="btn btn-sm btn-success quantity">
+            <button type="button" class="btn btn-sm btn-success decrement" style="width: 80px; background-color: #687EFF; margin-right: 5px;">-</button> 
+
+          </form>
+
         {% else %}
           <a class="btn btn-success" id="success-buy" href="{% url 'inicio_sesion' %}">Añadir al Carrito</a>
           <a class="btn btn-success" id="success-buy" href="{% url 'inicio_sesion' %}">Carrito</a>
         {% endif %}
               
-        <h1 style="color: white;">{{videojuego.nombre}}</h1>
+        <h1 style="color: white; margin-top: 10px;">{{videojuego.nombre}}</h1>
 
         <p style="color: white;">{{videojuego.informacion}}</p>
 
@@ -43,6 +52,10 @@
     
           {% for message in messages %} {% if 'buy_succesfull' in message.tags and forloop.first %} 
             <div class="success-message-buy">{{message}}</div>
+          {% endif %} {% endfor %} 
+
+          {% for message in messages %} {% if 'videogame_in_car' in message.tags and forloop.first %} 
+            <div class="error-message-buy">{{message}}</div>
           {% endif %} {% endfor %} 
             
         </form>

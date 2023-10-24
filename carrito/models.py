@@ -12,4 +12,4 @@ class Carrito(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Usuario {self.usuario} - Producto {self.videojuego} - {self.cantidad} unidades"
+        return f"Usuario {self.usuario} - Producto {self.videojuego.nombre} - {self.cantidad} unidades"

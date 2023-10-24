@@ -30,9 +30,8 @@ def agregar_al_carrito(request, videojuego):
         return redirect("compra", videojuego=videojuego.nombre)
     
     carrito = Carrito.objects.get_or_create(usuario=request.user, videojuego=videojuego, cantidad=cantidad)
-    carrito = Carrito.objects.filter(usuario=request.user)
 
-    return render(request, "carrito/carrito.html", {"carrito":carrito})
+    return redirect("carrito")
 
 def vaciar_carrito(request):
     carrito = Carrito.objects.filter(usuario=request.user)
@@ -41,7 +40,7 @@ def vaciar_carrito(request):
     if not carrito:
         messages.success(request, "Se ha vaciado el carrito de compras", extra_tags="not_videogames_car")
 
-    return render(request, "carrito/carrito.html", {"carrito":carrito})
+    return redirect("carrito")
 
 def eliminar_del_carrito(request, videojuego):
     try:
@@ -51,6 +50,4 @@ def eliminar_del_carrito(request, videojuego):
     except Carrito.DoesNotExist:
         pass
 
-    carrito = Carrito.objects.filter(usuario=request.user)
-
-    return render(request, "carrito/carrito.html", {"carrito":carrito})
+    return redirect("carrito")

@@ -37,9 +37,6 @@ def vaciar_carrito(request):
     carrito = Carrito.objects.filter(usuario=request.user)
     carrito.delete()
 
-    if not carrito:
-        messages.success(request, "Se ha vaciado el carrito de compras", extra_tags="not_videogames_car")
-
     return redirect("carrito")
 
 def eliminar_del_carrito(request, videojuego):

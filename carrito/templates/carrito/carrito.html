@@ -12,7 +12,6 @@
     </div>
 
     {% for item in carrito %}
-      <a class="delete-videogame-car" href="{% url 'eliminar_del_carrito' item.videojuego.nombre %}">Eliminar del carrito</a>
 
       <div class="container-car">
         <div class="align-card-car">
@@ -23,14 +22,8 @@
             <span style="color: greenyellow;">${{item.videojuego.precio}}</span>
           </a>
 
-          <form action="{% url 'compra' item.videojuego.nombre %}" method="post" role="form" style="display: flex; flex-direction: row;">
-            {% csrf_token %}
-            
-            <button type="button" class="btn btn-sm btn-success increment" style="width: 80px; background-color: #687EFF; margin-right: 10px;">+</button>   
-            <input type="number" name="quantity" value="1" min="1" style="width: 60px; background-color: #687EFF; margin-right: 10px;" class="btn btn-sm btn-success quantity">
-            <button type="button" class="btn btn-sm btn-success decrement" style="width: 80px; background-color: #687EFF; margin-right: 10px;">-</button>
-            <button class="btn btn-success" type="submit" style="margin-bottom: 0px;background-color: green;">Comprar</button>
-          </form>
+          <a class="btn btn-success" href="{% url 'eliminar_del_carrito' item.videojuego.nombre %}" style="background-color: Crimson; margin-left: 50px;">Eliminar</a>
+          <a class="btn btn-success" type="submit" style="margin-bottom: 0px; background-color: green; margin-left: 12px;">Comprar</a>
           
         </div>
       </div>

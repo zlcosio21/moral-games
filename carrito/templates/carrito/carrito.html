@@ -17,13 +17,15 @@
         <div class="align-card-car">
             
           <a href="{% url 'compra' item.videojuego.nombre %}">
-            <img src="{{item.videojuego.imagen.url}}" alt="Sin imagen"  style="width: 7%; height: 7%;">
-            <span style="color: white; margin-left: 10px;">{{item.videojuego.nombre}}</span>
+            <img src="{{item.videojuego.imagen.url}}" alt="Sin imagen" style="width: 7%; height: 7%;">
+            <span class="name-videogame-car">{{item.videojuego.nombre}}</span>
             <span style="color: greenyellow;">${{item.videojuego.precio}}</span>
           </a>
 
-          <a class="btn btn-success" href="{% url 'eliminar_del_carrito' item.videojuego.nombre %}" style="background-color: Crimson; margin-left: 50px;">Eliminar</a>
-          <a class="btn btn-success" type="submit" style="margin-bottom: 0px; background-color: green; margin-left: 12px;">Comprar</a>
+          <div class="buttons-car">
+            <a class="btn btn-success delete-game-car" href="{% url 'eliminar_del_carrito' item.videojuego.nombre %}">Eliminar</a>
+            <a class="btn btn-success" type="submit" style="background-color: green;">Comprar</a>
+          </div>
           
         </div>
       </div>
@@ -31,7 +33,7 @@
     {% endfor %}
     
     <div style="text-align: center;">
-      <a href="{% url 'vaciar_carrito' %}" class="btn btn-success" style="display: inline-block; margin-bottom: 25px;">Vaciar carrito</a>
+      <a href="{% url 'vaciar_carrito' %}" class="btn btn-success delete-car">Vaciar carrito</a>
     </div>
     
   </div>

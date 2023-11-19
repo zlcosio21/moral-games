@@ -359,6 +359,22 @@ h6 {
   font-size: 16px;
   margin-top: 5px;
 }
+
+#card-element {
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#card-errors {
+  color: red;
+  margin-top: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
 /*--------------------------------------------------------------
 # car
 --------------------------------------------------------------*/

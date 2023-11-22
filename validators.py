@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 import os
 from dotenv import load_dotenv
+from django.db import models
 
 load_dotenv()
 EMAIL = os.getenv("EMAIL")
@@ -54,3 +55,12 @@ def stock_error(request, cantidad, videojuego):
         return  messages.error(request, f"Solo se encuentran disponibles {videojuego.cantidad} unidades del videojuego", extra_tags="stock_error")
     
     validator_stock(videojuego, cantidad)
+
+
+# Abstract class
+class Models(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True

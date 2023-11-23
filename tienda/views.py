@@ -2,10 +2,8 @@ from django.shortcuts import render, redirect
 from inventario.models import Videojuego
 from tienda.video import video
 from django.db.models import Q
-from django.core.mail import EmailMessage
 from django.contrib import messages
-from tienda.models import HistorialCompra
-from validators import stock_error, EMAIL
+from validators import stock_error, send_email_buy, save_order, validator_stock
 
 # Create your views here.
 def tienda(request):
@@ -32,18 +30,12 @@ def compra(request, videojuego):
     if request.method == "POST":
         cantidad = request.POST.get("quantity")
 
-        stock_error(request, cantidad, videojuego)
-
-        if videojuego.cantidad < 1:
+        if stock_error(request, cantidad, videojuego):
             return redirect("compra", videojuego=videojuego.nombre)
 
-        total = (int(cantidad) * videojuego.precio)
-    
-        envio_email = EmailMessage("Mensaje desde MoralGames", f"El cliente {request.user}, a realizado la compra de {cantidad} copias de {videojuego.nombre}. El total de la compra es de ${total}", "", [EMAIL], reply_to=[request.user.email])
-        envio_email.send()
-
-        guardar_pedido = HistorialCompra.objects.create(usuario=request.user, videojuego=videojuego.nombre, cantidad=cantidad)
-        guardar_pedido.save()
+        validator_stock(videojuego, cantidad)
+        send_email_buy(request, videojuego, cantidad)
+        save_order(request, videojuego, cantidad)
 
         messages.success(request, f"Compra realizada exitosamente, factura enviada a su correo", extra_tags="buy_succesfull")
     

@@ -25,8 +25,7 @@ def agregar_al_carrito(request, videojuego):
         messages.error(request, "El videojuego ya se encuentra en el carrito de compras", extra_tags="videogame_in_car")
         return redirect("compra", videojuego=videojuego.nombre)
 
-    if videojuego.cantidad < 1:
-        stock_error(request, cantidad, videojuego)
+    if stock_error(request, cantidad, videojuego):
         return redirect("compra", videojuego=videojuego.nombre)
     
     carrito = Carrito.objects.get_or_create(usuario=request.user, videojuego=videojuego, cantidad=cantidad)

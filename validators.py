@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 import os
 from dotenv import load_dotenv
 from django.db import models
+from django.core.mail import EmailMessage
+from tienda.models import HistorialCompra
+from django.shortcuts import redirect
 
 load_dotenv()
 EMAIL = os.getenv("EMAIL")
@@ -51,10 +54,19 @@ def validator_stock(videojuego, cantidad):
         videojuego.save()
 
 def stock_error(request, cantidad, videojuego):
-    if videojuego.cantidad < int(cantidad) or videojuego.cantidad == 0:
-        return  messages.error(request, f"Solo se encuentran disponibles {videojuego.cantidad} unidades del videojuego", extra_tags="stock_error")
+    if videojuego.cantidad < int(cantidad) or videojuego.cantidad < 0:
+        messages.error(request, f"Solo se encuentran disponibles {videojuego.cantidad} unidades del videojuego", extra_tags="stock_error")
+        return True
+
+def send_email_buy(request, videojuego, cantidad):
+    total = (int(cantidad) * videojuego.precio)
     
-    validator_stock(videojuego, cantidad)
+    email = EmailMessage("Mensaje desde MoralGames", f"El cliente {request.user}, a realizado la compra de {cantidad} copias de {videojuego.nombre}. El total de la compra es de ${total}", "", [EMAIL], reply_to=[request.user.email])
+    email.send()
+
+def save_order(request, videojuego, cantidad):
+    guardar_pedido = HistorialCompra.objects.create(usuario=request.user, videojuego=videojuego.nombre, cantidad=cantidad)
+    guardar_pedido.save()
 
 
 # Abstract class

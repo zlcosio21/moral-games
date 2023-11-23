@@ -2,10 +2,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 import os
 from dotenv import load_dotenv
-from django.db import models
 from django.core.mail import EmailMessage
 from tienda.models import HistorialCompra
-from django.shortcuts import redirect
 
 load_dotenv()
 EMAIL = os.getenv("EMAIL")
@@ -67,12 +65,3 @@ def send_email_buy(request, videojuego, cantidad):
 def save_order(request, videojuego, cantidad):
     guardar_pedido = HistorialCompra.objects.create(usuario=request.user, videojuego=videojuego.nombre, cantidad=cantidad)
     guardar_pedido.save()
-
-
-# Abstract class
-class Models(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        abstract = True

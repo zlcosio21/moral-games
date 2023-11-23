@@ -10,9 +10,6 @@ def tienda(request):
     if request.method == "POST":
         busqueda = request.POST.get("busqueda")
 
-        if busqueda == " ":
-            return redirect("tienda")
-        
         videojuegos = Videojuego.objects.filter(
             Q(nombre__icontains=busqueda) | 
             Q(plataforma__nombre__icontains=busqueda) | 

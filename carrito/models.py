@@ -1,7 +1,7 @@
 from django.db import models
 from inventario.models import Videojuego
 from django.contrib.auth.models import User
-from validators import Models
+from MoralGamesWeb.base_models import Models
 
 # Create your models here.
 class Carrito(Models):

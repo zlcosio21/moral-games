@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from validators import Models
+from MoralGamesWeb.base_models import Models
 
 # Create your models here - Creacion models
 class Post(Models):

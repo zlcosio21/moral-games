@@ -1,5 +1,5 @@
 from django.db import models
-from validators import Models
+from MoralGamesWeb.base_models import Models
 
 # Create your models here.
 class Plataforma(Models):

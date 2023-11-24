@@ -3,7 +3,3 @@ from django.shortcuts import render
 # Create your views here.
 def home(request):
     return render(request, "MoralGamesApp/home.html")
-
-
-def servicios(request):
-    return render(request, "MoralGamesApp/servicios.html")

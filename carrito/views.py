@@ -43,3 +43,19 @@ def eliminar_del_carrito(request, videojuego):
         pass
 
     return redirect("carrito")
+
+def comprar_carrito(request):
+    carrito = Carrito.objects.filter(usuario=request.user)
+    total = 0
+
+    for item in carrito:
+        total += item.videojuego.precio * item.cantidad
+
+        videojuego = Videojuego.objects.get(nombre = item.videojuego.nombre)
+        videojuego.cantidad -= item.cantidad
+        videojuego.save()
+
+    messages.success(request, f"Compra realizada satisfactoriamente, el total de la compra es de {total}, revise su email", extra_tags="buy_car_success")
+    carrito.delete()
+
+    return redirect("carrito")

@@ -16,7 +16,7 @@ def tienda(request):
             Q(genero__nombre__icontains=busqueda)
         ).distinct()
         
-        return render(request, "tienda/busqueda.html", {"videojuegos":videojuegos})
+        return render(request, "tienda/busqueda.html", {"videojuegos":videojuegos, "busqueda":busqueda})
 
     videojuego = Videojuego.objects.all()
     return render(request, "tienda/tienda.html", {"videojuegos":videojuego})

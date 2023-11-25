@@ -25,7 +25,7 @@
 
           <div class="buttons-car">
             <a class="btn btn-success delete-game-car" href="{% url 'eliminar_del_carrito' item.videojuego.nombre %}">Eliminar</a>
-            <a class="btn btn-success" type="submit" style="background-color: green;">Comprar</a>
+            <a class="btn btn-success" href="{% url 'compra' item.videojuego.nombre %}" style="background-color: green;">Comprar</a>
           </div>
           
         </div>

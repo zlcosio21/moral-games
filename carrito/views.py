@@ -7,12 +7,8 @@ from validators import stock_error
 # Create your views here.
 def carrito(request):
     carrito = Carrito.objects.filter(usuario=request.user)
-    total = 0
 
-    for item in carrito:
-        total = total + (item.videojuego.precio * item.cantidad)
-
-    return render(request, "carrito/carrito.html", {"carrito":carrito, "total":total})
+    return render(request, "carrito/carrito.html", {"carrito":carrito})
 
 def agregar_al_carrito(request, videojuego):
     videojuego = Videojuego.objects.get(nombre=videojuego)

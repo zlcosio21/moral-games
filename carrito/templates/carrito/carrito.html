@@ -18,8 +18,9 @@
             
           <a href="{% url 'compra' item.videojuego.nombre %}">
             <img src="{{item.videojuego.imagen.url}}" alt="Sin imagen" style="width: 7%; height: 7%;">
-            <span class="name-videogame-car">{{item.videojuego.nombre}}</span>
+            <span class="name-videogame-car">{{item.videojuego.nombre}}|</span>
             <span style="color: greenyellow;">${{item.videojuego.precio}}</span>
+            <span style="color: white;">|{{item.cantidad}} unidades</span>
           </a>
 
           <div class="buttons-car">

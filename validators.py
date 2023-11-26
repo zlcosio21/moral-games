@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from django.core.mail import EmailMessage
 from tienda.models import HistorialCompra
+from carrito.models import HistorialCompraCarrito
 
 load_dotenv()
 EMAIL = os.getenv("EMAIL")
@@ -65,3 +66,8 @@ def send_email_buy(request, videojuego, cantidad):
 def save_order(request, videojuego, cantidad):
     guardar_pedido = HistorialCompra.objects.create(usuario=request.user, videojuego=videojuego.nombre, cantidad=cantidad)
     guardar_pedido.save()
+
+def save_order_car(request, videojuegos):
+    videojuegos = ' '.join(videojuegos)
+    guardar_pedido_carrito = HistorialCompraCarrito.objects.create(usuario=request.user, videojuego=videojuegos)
+    guardar_pedido_carrito.save()

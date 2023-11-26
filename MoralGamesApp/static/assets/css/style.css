@@ -496,6 +496,28 @@ h6 {
 .delete-car {
   display: inline-block;
   margin-bottom: 25px;
+  margin-right: 20px;
+}
+
+.button-buy-car {
+  margin-bottom: 25px !important;
+}
+
+.stripe {
+  width: 500px;
+  margin-right: 20px;
+}
+
+.error-stripe {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: center;
+}
+
+.success-message-car {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .delete-game-car {

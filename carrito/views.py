@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from carrito.models import Carrito
 from inventario.models import Videojuego
 from django.contrib import messages
-from validators import stock_error
+from validators import stock_error, save_order_car
 
 # Create your views here.
 def carrito(request):
@@ -46,6 +46,7 @@ def eliminar_del_carrito(request, videojuego):
 
 def comprar_carrito(request):
     carrito = Carrito.objects.filter(usuario=request.user)
+    lista_videojuegos = []
     total = 0
 
     for item in carrito:
@@ -55,7 +56,11 @@ def comprar_carrito(request):
         videojuego.cantidad -= item.cantidad
         videojuego.save()
 
-    messages.success(request, f"Compra realizada satisfactoriamente, el total de la compra es de {total}, revise su email", extra_tags="buy_car_success")
+        lista_videojuegos.append(str(f"{videojuego.nombre} - {item.cantidad} unidades,"))
+
+    save_order_car(request, lista_videojuegos)
+    
+    messages.success(request, f"Compra realizada satisfactoriamente, el total de la compra es de ${total}, revise su email", extra_tags="buy_car_success")
     carrito.delete()
 
     return redirect("carrito")

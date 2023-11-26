@@ -11,3 +11,11 @@ class Carrito(Models):
 
     def __str__(self):
         return f"Usuario {self.usuario} - Producto {self.videojuego.nombre} - {self.cantidad} unidades"
+    
+class HistorialCompraCarrito(Models):
+    id = models.AutoField(primary_key=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    videojuego = models.CharField(max_length=5000)
+
+    def __str__(self):
+        return f"Pedido #{self.id} - {self.usuario} - {self.videojuego} - Realizado {self.created}"

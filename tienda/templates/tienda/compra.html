@@ -38,11 +38,9 @@
 
         <div class="search-buy">
           <form action="{% url 'tienda' %}" method="post" role="form" class="php-email-form">
-            {% csrf_token %}
-        
-            Plataformas:
-         
-            {% for plataforma in videojuego.plataforma.all %} 
+            {% csrf_token %}        
+            
+            Plataformas: {% for plataforma in videojuego.plataforma.all %} 
               <button type="submit" class="transparent-button-buy search-platformer">
                 <input type="hidden" name="busqueda" value="{{ plataforma.nombre }}">{{plataforma.nombre }}
               </button>
@@ -54,9 +52,8 @@
         <div class="search-buy">
           <form action="{% url 'tienda' %}" method="post" role="form" class="php-email-form">
             {% csrf_token %}
-            Generos: 
-         
-            {% for genero in videojuego.genero.all %} 
+            
+            Generos: {% for genero in videojuego.genero.all %} 
               <button type="submit" class="transparent-button-buy search-platformer">
                 <input type="hidden" name="busqueda" value="{{ genero.nombre }}">{{genero.nombre }}
               </button>

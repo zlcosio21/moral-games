@@ -33,9 +33,17 @@
       
     {% endfor %}
     
-    <div style="text-align: center;">
+    <form action="{% url 'comprar_carrito' %}" method="post" role="form" id="payment-form" style="display: flex; flex-direction: row; justify-content: center;">
+      {% csrf_token %}
+
       <a href="{% url 'vaciar_carrito' %}" class="btn btn-success delete-car">Vaciar carrito</a>
-    </div>
+
+      <div id="card-element" class="stripe"></div>
+      <button type="submit" id="submit-button" class="btn btn-success" style="margin-bottom: 25px; background-color: green;">Comprar</button>
+
+    </form> 
+
+    <div id="card-errors" role="alert" class="error-stripe"></div> 
     
   </div>
 

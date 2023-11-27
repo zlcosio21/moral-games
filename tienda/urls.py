@@ -8,5 +8,6 @@ urlpatterns = [
 
     path('', views.tienda, name="tienda"),
     path('compra/<str:videojuego>/', views.compra, name="compra"),
+    path('historial_compra/', views.historial_compra, name="historial_compra")
         
 ]

@@ -1,0 +1,37 @@
+{% extends "MoralGamesApp/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section id="purchase-history" class="section-with-bg">
+  
+  <div class="container" data-aos="fade-up">
+    <div class="section-header">
+      <h2 style="color: white;">Historial de Compras</h2>
+    </div>
+
+    {% for registro in historial_completo %}
+
+      <div class="container-history">
+
+        {% if registro.cantidad %}
+          <span>Codigo Compra #{{registro.id}}|</span>
+          <span>{{registro.videojuego}} - </span>
+          <span>{{registro.cantidad}} unidades|</span>
+          <span>{{registro.created}}</span>
+        {% else %}
+          <span>Codigo Carrito #{{registro.id}}|</span>
+          <span>{{registro.videojuego}}|</span>
+          <span>{{registro.created}}</span> 
+        {% endif %}
+
+      </div>
+
+    {% endfor %}
+  
+  </div>
+
+</section>
+
+{% endblock %}

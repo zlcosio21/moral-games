@@ -34,8 +34,6 @@
               
         <h1 style="color: white; margin-top: 10px;">{{videojuego.nombre}}</h1>
 
-        <p style="color: white;">{{videojuego.informacion}}</p>
-
         <div class="search-buy">
           <form action="{% url 'tienda' %}" method="post" role="form" class="php-email-form">
             {% csrf_token %}        

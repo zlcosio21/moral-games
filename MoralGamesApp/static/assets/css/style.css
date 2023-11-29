@@ -358,9 +358,21 @@ h6 {
 /*--------------------------------------------------------------
 # buys
 --------------------------------------------------------------*/
+#buy {
+  width: 100%;
+  background: url(../img/fondo_tienda.jpg) top center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: repeat;
+  overflow: hidden;
+  position: relative;
+  padding-top: 120px;
+}
+
 .container-buy {
   display: flex;
   align-items: center;
+  margin-top: 10px;
 }
 
 .content-buy {

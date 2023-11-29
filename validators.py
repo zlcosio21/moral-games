@@ -71,3 +71,14 @@ def save_order_car(request, videojuegos):
     videojuegos = ' '.join(videojuegos)
     guardar_pedido_carrito = HistorialCompraCarrito.objects.create(usuario=request.user, videojuego=videojuegos)
     guardar_pedido_carrito.save()
+
+def send_email_buy_car(request, lista_videojuegos, total):
+    cuerpo_correo = f"El cliente {request.user}, a realizado la compra de los siguientes videojuegos:\n\n"
+
+    for videojuego in lista_videojuegos:
+        cuerpo_correo += f"{videojuego}\n"
+
+    cuerpo_correo += f"\n El total de la compra es de ${total}"
+
+    email = EmailMessage("Mensaje desde MoralGames", cuerpo_correo, "", [EMAIL], reply_to=[request.user.email])
+    email.send()

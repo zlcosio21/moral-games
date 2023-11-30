@@ -446,6 +446,46 @@ h6 {
   color: white
 }
 
+@media (max-width: 768px) {
+  .container-buy {
+    flex-direction: column;
+  }
+
+  iframe {
+    width: 100% !important;
+    height: 350px;
+  }
+
+  .content-buy {
+    width: 100%;
+    margin-right: 0;
+    margin-top: -80px;
+  }
+
+  .increment {
+    width: 36px !important;
+  }
+  
+  .decrement {
+    width: 36px !important;
+  }
+
+  .quantity {
+    width: 35px !important;
+  }
+
+  .cart {
+    margin-top: 360px !important;
+    left: 308px !important;
+  }
+
+  .add-game-car {
+    width: 120px !important;
+    font-size: 13px;
+  }
+
+}
+
 /*--------------------------------------------------------------
 # car
 --------------------------------------------------------------*/

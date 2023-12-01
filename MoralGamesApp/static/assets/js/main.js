@@ -251,5 +251,19 @@
     });
   });
   
+  /**
+   * responsive purchase history
+   */
+
+  document.addEventListener('DOMContentLoaded', function(){
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      var videogamesList = document.querySelectorAll(".history");
+  
+      videogamesList.forEach(function(videogames) {
+        videogames.innerHTML = videogames.innerHTML.replace(/,|\|/g, '<br>');
+        videogames.innerHTML = videogames.innerHTML.replace(/\|/g, '');
+      });
+    }
+  });
 
 })()

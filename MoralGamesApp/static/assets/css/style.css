@@ -627,6 +627,39 @@ h6 {
   min-width: 200px;
 }
 
+@media screen and (max-width: 768px) {
+  .align-card-car {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .img-videogame {
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+
+  .name-videogame-car {
+    display: flex;
+    justify-content: center;
+  }
+
+  .buttons-car {
+    margin-top: 20px;
+    margin-right: 0;
+  }
+
+  #payment-form {
+    flex-direction: column !important;
+
+  }
+
+  .buttons-actions-car {
+    width: auto !important;
+    margin-right: 0;
+  }
+
+}
+
 /*--------------------------------------------------------------
 # Purchase History
 --------------------------------------------------------------*/

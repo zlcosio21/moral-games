@@ -17,10 +17,8 @@
         <div class="align-card-car">
             
           <a href="{% url 'compra' item.videojuego.nombre %}">
-            <img src="{{item.videojuego.imagen.url}}" alt="Sin imagen" style="width: 7%; height: 7%;">
-            <span class="name-videogame-car">{{item.videojuego.nombre}}|</span>
-            <span style="color: greenyellow;">${{item.videojuego.precio}}</span>
-            <span style="color: white;">|{{item.cantidad}} unidades</span>
+            <img src="{{item.videojuego.imagen.url}}" alt="Sin imagen" style="width: 7%; height: 7%;" class="img-videogame">
+            <span class="name-videogame-car">{{item.videojuego.nombre}}| ${{item.videojuego.precio}} |{{item.cantidad}} unidades</span>
           </a>
 
           <div class="buttons-car">
@@ -38,10 +36,10 @@
       <form action="{% url 'comprar_carrito' %}" method="post" role="form" id="payment-form" style="display: flex; flex-direction: row; justify-content: center;">
         {% csrf_token %}
 
-        <a href="{% url 'vaciar_carrito' %}" class="btn btn-success delete-car">Vaciar carrito</a>
+        <a href="{% url 'vaciar_carrito' %}" class="btn btn-success delete-car buttons-actions-car">Vaciar carrito</a>
 
-        <div id="card-element" class="stripe"></div>
-        <button type="submit" id="submit-button" class="btn btn-success" style="margin-bottom: 25px; background-color: green;">Comprar</button>
+        <div id="card-element" class="stripe buttons-actions-car"></div>
+        <button type="submit" id="submit-button" class="btn btn-success buttons-actions-car" style="margin-bottom: 25px; background-color: green;">Comprar</button>
 
       </form> 
 

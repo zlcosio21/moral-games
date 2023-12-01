@@ -40,7 +40,6 @@ h6 {
   margin-top: 70px;
 }
 
-/* Prelaoder */
 #preloader {
   position: fixed;
   left: 0;
@@ -194,7 +193,6 @@ h6 {
 
 #store {
   width: 100%;
-  /* height: 100vh; */ /* Comenta o elimina esta línea */
   background: url(../img/fondo_tienda.jpg) top center;
   background-size: cover;
   background-attachment: fixed;
@@ -556,8 +554,8 @@ h6 {
 
 .cart {
   position: absolute;
-  right: 96px; /* Ajusta la posición a tu preferencia */
-  top: 137px; /* Ajusta la posición a tu preferencia */
+  right: 96px;
+  top: 137px;
 }
 
 .cart .transparent-button {
@@ -568,7 +566,7 @@ h6 {
 
 .cart .transparent-button i {
   font-size: 25px;
-  color: white; /* Color del icono del carrito */
+  color: white;
   line-height: 40px;
 }
 
@@ -630,7 +628,7 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Purchaes History
+# Purchase History
 --------------------------------------------------------------*/
 
 #purchase-history {

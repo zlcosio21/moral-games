@@ -16,13 +16,12 @@
       <div class="container-history">
 
         {% if registro.cantidad %}
-          <span>Codigo Compra #{{registro.id}}|</span>
-          <span>{{registro.videojuego}} - </span>
-          <span>{{registro.cantidad}} unidades|</span>
-          <span>{{registro.created}}</span>
+          <span class="history code-buy">Codigo Compra #{{registro.id}}|</span>
+          <span class="history">{{registro.videojuego}} - {{registro.cantidad}} unidades|</span>
+          <span class="history-games-date">{{registro.created}}</span>
         {% else %}
-          <span>Codigo Carrito #{{registro.id}}|</span>
-          <span>{{registro.videojuego}}|</span>
+          <span class="history code-buy">Codigo Carrito #{{registro.id}}|</span>
+          <span class="history">{{registro.videojuego}}|</span>
           <span>{{registro.created}}</span> 
         {% endif %}
 

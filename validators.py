@@ -44,8 +44,8 @@ def isvalid(request, username, password, password_confirm):
 
     if len(username) >= 8 and (len(password) >= 8 and len(password_confirm) >= 8) and password == password_confirm and not exist:
         return True
-    else:
-        return False
+
+    return False
     
 def validator_stock(videojuego, cantidad):
     if videojuego.cantidad >= int(cantidad):

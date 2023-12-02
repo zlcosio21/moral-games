@@ -53,9 +53,8 @@ def inicio_sesion(request):
             login(request, user)
 
             return redirect("home")
-        
-        else:
-            messages.error(request, "La cuenta no existe, ingrese los datos nuevamente", extra_tags="account_not_exist")
+            
+        messages.error(request, "La cuenta no existe, ingrese los datos nuevamente", extra_tags="account_not_exist")
 
     return render(request, "autenticacion/inicio_sesion.html", {'messages': messages.get_messages(request)})
 

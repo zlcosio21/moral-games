@@ -567,7 +567,7 @@ h6 {
 .cart .transparent-button i {
   font-size: 25px;
   color: white;
-  line-height: 40px;
+  line-height: 60px;
 }
 
 .buttons-car {
@@ -656,6 +656,10 @@ h6 {
   .buttons-actions-car {
     width: auto !important;
     margin-right: 0;
+  }
+
+  .cart .transparent-button i {
+    line-height: 40px;
   }
 
 }

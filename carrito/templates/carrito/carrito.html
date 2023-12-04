@@ -50,7 +50,10 @@
       {% for message in messages %}
         <div class="error-message-buy success-message-car">{{message}}</div>
       {% empty  %}
-        <h3 class="error-message-buy no-car-error">Sin videojuegos en el carrito</h3>
+        <div class="margin-default">
+          <h3 class="error-message-buy no-car-error">Sin videojuegos en el carrito</h3>
+          <a href="{% url 'tienda' %}" style="color: white;">Comprar videojuegos</a>
+        </div>
       {% endfor %}
 
     {% endif %} 

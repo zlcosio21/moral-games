@@ -5,7 +5,7 @@
 {% block content %}
 
 <section id="purchase-history" class="section-with-bg">
-  
+
   <div class="container" data-aos="fade-up">
     <div class="section-header">
       <h2 style="color: white;">Historial de Compras</h2>
@@ -22,20 +22,20 @@
         {% else %}
           <span class="history code-buy">Codigo Carrito #{{registro.id}}|</span>
           <span class="history">{{registro.videojuego}}|</span>
-          <span>{{registro.created}}</span> 
+          <span>{{registro.created}}</span>
         {% endif %}
 
       </div>
 
     {% endfor %}
-  
+
     {% if not historial_completo %}
       <div class="margin-default">
         <h3 class="error-message-buy no-car-error">Sin compras en la tienda</h3>
         <a href="{% url 'tienda' %}" style="color: white;">Comprar videojuegos</a>
       </div>
     {% endif %}
-  
+
   </div>
 
 </section>

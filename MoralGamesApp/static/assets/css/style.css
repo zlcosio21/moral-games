@@ -1235,6 +1235,24 @@ h6 {
   margin-bottom: 20px;
 }
 
+@media (max-width: 768px) {
+  #contact .contact-info {
+    margin-top: 35px !important;
+  }
+
+  #contact .contact-address,
+  #contact .contact-phone,
+  #contact .contact-email {
+    padding: 20px 0;
+  }
+
+  #contact .contact-phone {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+  }
+
+}
+
 @media (min-width: 768px) {
 
   #contact .contact-address,

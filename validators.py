@@ -8,7 +8,7 @@ from carrito.models import HistorialCompraCarrito
 
 load_dotenv()
 EMAIL = os.getenv("EMAIL")
- 
+
 def username_characters_error(request, *username):
     for user in username:
         if len(user) < 8:
@@ -32,12 +32,12 @@ def password_invalid(request, password_actual):
     password_valida = user.check_password(password_actual)
     if not password_valida:
         return messages.error(request, "La contraseña actual es incorrecta, ingrese nuevamente", extra_tags="password_invalid")
-    
+
 def equals_error(request, password, password_confirm):
 
     if password != password_confirm:
         return messages.error(request, "Las contraseñas deben ser iguales. Ingrese nuevamente", extra_tags="equals_error")
-    
+
 def isvalid(request, username, password, password_confirm):
     user = request.user
     exist = User.objects.filter(username=username).exclude(pk=user.pk).exists()
@@ -46,7 +46,7 @@ def isvalid(request, username, password, password_confirm):
         return True
 
     return False
-    
+
 def validator_stock(videojuego, cantidad):
     if videojuego.cantidad >= int(cantidad):
         videojuego.cantidad -= int(cantidad)
@@ -59,7 +59,7 @@ def stock_error(request, cantidad, videojuego):
 
 def send_email_buy(request, videojuego, cantidad):
     total = (int(cantidad) * videojuego.precio)
-    
+
     email = EmailMessage("Mensaje desde MoralGames", f"El cliente {request.user}, a realizado la compra de {cantidad} copias de {videojuego.nombre}. El total de la compra es de ${total}", "", [EMAIL], reply_to=[request.user.email])
     email.send()
 

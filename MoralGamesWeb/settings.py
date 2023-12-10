@@ -89,12 +89,8 @@ WSGI_APPLICATION = 'MoralGamesWeb.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'moral_games',
-        'USER': 'root',
-        'PASSWORD': 'minato21',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

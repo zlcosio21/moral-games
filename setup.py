@@ -33,5 +33,5 @@ setup(
     extras_require={
         'dev': [],
     },
-    python_requires='==3.12',
+    python_requires='==3.12.1',
 )

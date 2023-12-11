@@ -1,33 +1,18 @@
-MoralGamesWeb/__init__.py
 MoralGamesWeb/__pycache__
 
-MoralGamesApp/__init__.py
 MoralGamesApp/__pycache__
-MoralGamesApp/migrations
 
-contacto/__init__.py
 contacto/__pycache__
-contacto/migrations
 
-blog/__init__.py
 blog/__pycache__
-blog/migrations
 
-autenticacion/__init__.py
 autenticacion/__pycache__
-autenticacion/migrations
 
-inventario/__init__.py
 inventario/__pycache__
-inventario/migrations
 
-tienda/__init__.py
 tienda/__pycache__
-tienda/migrations
 
-carrito/__init__.py
 carrito/__pycache__
-carrito/migrations
 
 db.sqlite3
 .env

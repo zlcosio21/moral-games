@@ -7,4 +7,3 @@ virtual
 venv/
 **/migrations/
 *.pyc
-staticfiles/

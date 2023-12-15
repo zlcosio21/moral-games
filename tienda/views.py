@@ -13,11 +13,11 @@ def tienda(request):
         busqueda = request.POST.get("busqueda")
 
         videojuegos = Videojuego.objects.filter(
-            Q(nombre__icontains=busqueda) | 
-            Q(plataforma__nombre__icontains=busqueda) | 
+            Q(nombre__icontains=busqueda) |
+            Q(plataforma__nombre__icontains=busqueda) |
             Q(genero__nombre__icontains=busqueda)
         ).distinct()
-        
+
         return render(request, "tienda/busqueda.html", {"videojuegos":videojuegos, "busqueda":busqueda})
 
     videojuego = Videojuego.objects.all()
@@ -37,7 +37,7 @@ def compra(request, videojuego):
         save_order(request, videojuego, cantidad)
 
         messages.success(request, f"Compra realizada exitosamente, factura enviada a su correo", extra_tags="buy_succesfull")
-    
+
     nombre_videojuego = f"{videojuego.nombre} Official Trailer"
     video_url = video(nombre_videojuego)
 
@@ -45,7 +45,7 @@ def compra(request, videojuego):
 
 def historial_compra(request):
     historial_compra = HistorialCompra.objects.filter(usuario=request.user).values("id", "videojuego", "created", "cantidad")
-    
+
     historial_compra_carrito = HistorialCompraCarrito.objects.filter(usuario=request.user).values("id", "videojuego", "created")
     historial_compra_carrito = historial_compra_carrito.annotate(cantidad=Value(None, output_field=IntegerField()))
 

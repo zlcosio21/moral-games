@@ -32,7 +32,7 @@ def registro(request):
 
            user = User.objects.create_user(username=username, email=email, password=password)
            user.save()
-           
+
            envio_email = EmailMessage("Mensaje desde MoralGames", "El usuario con nombre {}, ha registrado su cuenta, con correo {} \n\n ".format(username, email), "",[EMAIL], reply_to=[email])
            envio_email.send()
 
@@ -53,7 +53,7 @@ def inicio_sesion(request):
             login(request, user)
 
             return redirect("home")
-            
+
         messages.error(request, "La cuenta no existe, ingrese los datos nuevamente", extra_tags="account_not_exist")
 
     return render(request, "autenticacion/inicio_sesion.html", {'messages': messages.get_messages(request)})

@@ -10,6 +10,6 @@ def contacto(request):
         mensaje = request.POST.get("message")
 
         envio_email = EmailMessage("Mensaje desde DjangoWebProject", "El usuario con nombre {} con la direccion {} escribe lo siguiente: \n\n {} ".format(nombre, email, mensaje), "",[EMAIL], reply_to=[email])
-        envio_email.send() 
+        envio_email.send()
 
     return render(request, "contacto/contacto.html")

@@ -23,7 +23,7 @@ def agregar_al_carrito(request, videojuego):
 
     if stock_error(request, cantidad, videojuego):
         return redirect("compra", videojuego=videojuego.nombre)
-    
+
     carrito = Carrito.objects.get_or_create(usuario=request.user, videojuego=videojuego, cantidad=cantidad)
 
     return redirect("carrito")
@@ -60,7 +60,7 @@ def comprar_carrito(request):
 
     save_order_car(request, lista_videojuegos)
     send_email_buy_car(request, lista_videojuegos, total)
-    
+
     messages.success(request, f"Compra realizada satisfactoriamente, el total de la compra es de ${total}, revise su email", extra_tags="buy_car_success")
     carrito.delete()
 

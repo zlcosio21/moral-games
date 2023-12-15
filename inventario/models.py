@@ -26,5 +26,5 @@ class Videojuego(Models):
     def __str__(self):
         generos = ", ".join([genero.nombre for genero in self.genero.all()])
         plataformas = ", ".join([plataforma.nombre for plataforma in self.plataforma.all()])
-        
+
         return f"{self.nombre} - Precio {self.precio} - Cantidad {self.cantidad} - Genero(s) {generos} - Plataforma(s) {plataformas}"

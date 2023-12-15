@@ -5,7 +5,7 @@ from contacto import views
 urlpatterns = [
 
     path('', views.contacto, name="contacto"),
-        
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()

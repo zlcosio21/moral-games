@@ -10,5 +10,5 @@ class HistorialCompraCarritoAdmin(admin.ModelAdmin):
 
     readonly_fields = ('created', 'updated')
 
-admin.site.register(Carrito, CarritoAdmin)    
+admin.site.register(Carrito, CarritoAdmin)
 admin.site.register(HistorialCompraCarrito, HistorialCompraCarritoAdmin)

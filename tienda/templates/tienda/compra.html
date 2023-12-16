@@ -39,29 +39,29 @@
         <h1 style="color: white; margin-top: 10px;">{{videojuego.nombre}}</h1>
 
         <div class="search-buy">
-          <form action="{% url 'tienda' %}" method="post" role="form" class="php-email-form">
-            {% csrf_token %}        
-            
-            Plataformas: {% for plataforma in videojuego.plataforma.all %} 
+          Plataformas: {% for plataforma in videojuego.plataforma.all %}
+
+            <form action="{% url 'tienda' %}" method="post" role="form" class="php-email-form">
+              {% csrf_token %}
               <button type="submit" class="transparent-button-buy search-platformer">
-                <input type="hidden" name="busqueda" value="{{ plataforma.nombre }}">{{plataforma.nombre }}
+                <input type="hidden" name="busqueda" value="{{ plataforma.nombre }}">&nbsp;{{plataforma.nombre }}
               </button>
-            {% endfor %}
-        
-          </form>
+            </form>
+
+          {% endfor %}
         </div>
 
         <div class="search-buy">
-          <form action="{% url 'tienda' %}" method="post" role="form" class="php-email-form">
-            {% csrf_token %}
-            
-            Generos: {% for genero in videojuego.genero.all %} 
+          Generos: &nbsp; {% for genero in videojuego.genero.all %}
+
+            <form action="{% url 'tienda' %}" method="post" role="form" class="php-email-form">
+              {% csrf_token %}
               <button type="submit" class="transparent-button-buy search-platformer">
-                <input type="hidden" name="busqueda" value="{{ genero.nombre }}">{{genero.nombre }}
+                <input type="hidden" name="busqueda" value="{{ genero.nombre }}">&nbsp;{{genero.nombre }}
               </button>
-            {% endfor %}
-        
-          </form>
+            </form>
+
+          {% endfor %}
         </div>
 
         <form action="{% url 'compra' videojuego.nombre %}" method="post" role="form" id="payment-form">

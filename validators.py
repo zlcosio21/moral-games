@@ -60,7 +60,7 @@ def stock_error(request, cantidad, videojuego):
 def send_email_buy(request, videojuego, cantidad):
     total = (int(cantidad) * videojuego.precio)
 
-    email = EmailMessage("Mensaje desde MoralGames", f"El cliente {request.user}, a realizado la compra de {cantidad} copias de {videojuego.nombre}. El total de la compra es de ${total}", "", [EMAIL], reply_to=[request.user.email])
+    email = EmailMessage("Mensaje desde MoralGames", f"El cliente {request.user}, a realizado la compra de {cantidad} copias de {videojuego.nombre}. El total de la compra es de ${total}", "", [request.user.email], reply_to=[EMAIL])
     email.send()
 
 def save_order(request, videojuego, cantidad):
@@ -80,5 +80,5 @@ def send_email_buy_car(request, lista_videojuegos, total):
 
     cuerpo_correo += f"\n El total de la compra es de ${total}"
 
-    email = EmailMessage("Mensaje desde MoralGames", cuerpo_correo, "", [EMAIL], reply_to=[request.user.email])
+    email = EmailMessage("Mensaje desde MoralGames", cuerpo_correo, "", [request.user.email], reply_to=[EMAIL])
     email.send()

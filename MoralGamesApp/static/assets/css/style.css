@@ -56,7 +56,7 @@ h6 {
   margin-top: 150px;
   margin-bottom: 400px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   font-size: 25px;
 }
@@ -221,11 +221,11 @@ h6 {
   padding-top: 20px;
   margin: 20px;
   background: url(../img/fondo_videojuego.jpg) top center !important;
-  font-size: 36px; 
+  font-size: 36px;
   text-align: center;
   text-transform: uppercase;
   padding: 20px;
-  background: rgba(128, 0, 128, 0.5);; 
+  background: rgba(128, 0, 128, 0.5);;
   box-shadow: 0 0 10px rgba(128, 0, 128, 1), 0 0 20px rgba(128, 0, 128, 1), 0 0 30px rgba(128, 0, 128, 1);
   animation: glow 1s infinite alternate;
 }
@@ -256,7 +256,7 @@ h6 {
   }
 }
 
-.search { 
+.search {
 	position: absolute;
 	left: 32%;
 	top: 47%;
@@ -474,7 +474,7 @@ h6 {
   .increment {
     width: 36px !important;
   }
-  
+
   .decrement {
     width: 36px !important;
   }
@@ -500,7 +500,7 @@ h6 {
 --------------------------------------------------------------*/
 #car {
   width: 100%;
-  background: url(../img/fondo_carrito.jpg) top center;
+  background: url(../img/fondo_carrito_historial.jpg) top center;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: repeat;
@@ -516,14 +516,14 @@ h6 {
   background: url(../img/fondo_videojuego_carrito.jpg) top center !important;
   padding: 20px;
   margin-bottom: 10px;
-  background: rgba(128, 0, 128, 0.5);; 
+  background: rgba(128, 0, 128, 0.5);;
   box-shadow: 0 0 10px rgba(128, 0, 128, 0.4), 0 0 20px rgba(128, 0, 128, 0.4), 0 0 30px rgba(128, 0, 128, 10.7);
   animation: glow 1s infinite alternate;
   margin-bottom: 50px;
 }
 
 .align-card-car {
-  display: flex; 
+  display: flex;
   align-items: center;
   justify-content: space-between;
 }
@@ -534,7 +534,7 @@ h6 {
 
 .button-buy-car {
   width: 80px;
-  background-color:#687EFF; 
+  background-color:#687EFF;
   margin-right: 10px;
 }
 
@@ -603,8 +603,8 @@ h6 {
 }
 
 .error-stripe {
-  display: flex; 
-  flex-direction: row; 
+  display: flex;
+  flex-direction: row;
   justify-content: center;
 }
 
@@ -619,8 +619,19 @@ h6 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  font-size: 24px;
+  font-size: 30px;
   font-family: "Raleway", sans-serif;
+  font-weight: 700;
+}
+
+.buy-games {
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 30px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
 }
 
 .delete-game-car {
@@ -682,7 +693,7 @@ h6 {
 
 #purchase-history {
   width: 100%;
-  background: url(../img/fondo_carrito.jpg) top center;
+  background: url(../img/fondo_carrito_historial.jpg) top center;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: repeat;
@@ -698,7 +709,7 @@ h6 {
   background: url(../img/fondo_videojuego_carrito.jpg) top center !important;
   padding: 20px;
   margin-bottom: 10px;
-  background: rgba(128, 0, 128, 0.5);; 
+  background: rgba(128, 0, 128, 0.5);;
   box-shadow: 0 0 10px rgba(128, 0, 128, 0.4), 0 0 20px rgba(128, 0, 128, 0.4), 0 0 30px rgba(128, 0, 128, 10.7);
   animation: glow 1s infinite alternate;
   margin-bottom: 50px;
@@ -724,7 +735,7 @@ h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /**
-* Desktop Navigation 
+* Desktop Navigation
 */
 .navbar {
   padding: 0;
@@ -883,7 +894,7 @@ h6 {
 }
 
 /**
-* Mobile Navigation 
+* Mobile Navigation
 */
 .mobile-nav-toggle {
   color: #fff;
@@ -1191,7 +1202,7 @@ h6 {
 --------------------------------------------------------------*/
 
 #contact {
-  padding: 60px 0;
+      padding: 100px 0px 23px;
   background: url(../img/fondo_contacto.jpg) top center;
 }
 
@@ -1427,7 +1438,7 @@ h6 {
   #hotels .hotel {
     width: auto;
   }
-  
+
 }
 
 /*--------------------------------------------------------------

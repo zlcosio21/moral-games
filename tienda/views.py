@@ -6,6 +6,7 @@ from django.contrib import messages
 from validators import stock_error, send_email_buy, save_order, validator_stock
 from carrito.models import HistorialCompraCarrito
 from tienda.models import HistorialCompra
+import random
 
 # Create your views here.
 def tienda(request):
@@ -20,7 +21,9 @@ def tienda(request):
 
         return render(request, "tienda/busqueda.html", {"videojuegos":videojuegos, "busqueda":busqueda})
 
-    videojuego = Videojuego.objects.all()
+    videojuego = list(Videojuego.objects.all())
+    random.shuffle(videojuego)
+
     return render(request, "tienda/tienda.html", {"videojuegos":videojuego})
 
 def compra(request, videojuego):

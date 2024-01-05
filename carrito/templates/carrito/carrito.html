@@ -5,7 +5,7 @@
 {% block content %}
 
 <section id="car" class="section-with-bg">
-  
+
   <div class="container" data-aos="fade-up">
     <div class="section-header">
       <h2 style="color: white;">Carrito de Compras</h2>
@@ -15,7 +15,7 @@
 
       <div class="container-car">
         <div class="align-card-car">
-            
+
           <a href="{% url 'compra' item.videojuego.nombre %}">
             <img src="{{item.videojuego.imagen.url}}" alt="Sin imagen" style="width: 7%; height: 7%;" class="img-videogame">
             <span class="name-videogame-car">{{item.videojuego.nombre}}| ${{item.videojuego.precio}} |{{item.cantidad}} unidades</span>
@@ -25,12 +25,12 @@
             <a class="btn btn-success delete-game-car" href="{% url 'eliminar_del_carrito' item.videojuego.nombre %}">Eliminar</a>
             <a class="btn btn-success" href="{% url 'compra' item.videojuego.nombre %}" style="background-color: green;">Comprar</a>
           </div>
-          
+
         </div>
       </div>
-      
+
     {% endfor %}
-    
+
     {% if carrito %}
 
       <form action="{% url 'comprar_carrito' %}" method="post" role="form" id="payment-form" style="display: flex; flex-direction: row; justify-content: center;">
@@ -41,7 +41,7 @@
         <div id="card-element" class="stripe buttons-actions-car"></div>
         <button type="submit" id="submit-button" class="btn btn-success buttons-actions-car" style="margin-bottom: 25px; background-color: green;">Comprar</button>
 
-      </form> 
+      </form>
 
       <div id="card-errors" role="alert" class="error-stripe"></div> 
 
@@ -52,12 +52,12 @@
       {% empty  %}
         <div class="margin-default">
           <h3 class="error-message-buy no-car-error">Sin videojuegos en el carrito</h3>
-          <a href="{% url 'tienda' %}" style="color: white;">Comprar videojuegos</a>
+          <a href="{% url 'tienda' %}" class="buy-games">Comprar videojuegos</a>
         </div>
       {% endfor %}
 
-    {% endif %} 
-    
+    {% endif %}
+
   </div>
 
 </section>

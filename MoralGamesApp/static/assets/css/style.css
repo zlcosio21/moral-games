@@ -602,11 +602,6 @@ h6 {
   margin-right: 20px;
 }
 
-.margin-car {
-  margin-top: 280px !important;
-  display: block !important;
-}
-
 .error-stripe {
   display: flex;
   flex-direction: row;

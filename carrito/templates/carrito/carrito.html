@@ -43,7 +43,7 @@
 
       </form>
 
-      <div id="card-errors" role="alert" class="error-stripe"></div> 
+      <div id="card-errors" role="alert" class="error-stripe"></div>
 
     {% else %}
 
@@ -59,6 +59,12 @@
     {% endif %}
 
   </div>
+
+  {% if carrito|length == 1 %}
+    <span class="margin-car"></span>
+  {% elif carrito|length == 2 %}
+    <span class="margin-car"></span>
+  {% endif %}
 
 </section>
 

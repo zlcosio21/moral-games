@@ -36,6 +36,16 @@
       </div>
     {% endif %}
 
+    {% if historial_completo|length == 1 %}
+      <span style="margin-top: 445px !important; display: block !important;"></span>
+    {% elif historial_completo|length == 2 %}
+      <span style="margin-top: 340px !important; display: block !important;"></span>
+    {% elif historial_completo|length == 3 %}
+      <span style="margin-top: 225px !important; display: block !important;"></span>
+    {% elif historial_completo|length == 4 %}
+      <span style="margin-top: 105px !important; display: block !important;"></span>
+    {% endif %}
+
   </div>
 
 </section>

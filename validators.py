@@ -8,6 +8,7 @@ from carrito.models import HistorialCompraCarrito
 
 load_dotenv()
 EMAIL = os.getenv("EMAIL")
+PASSWORD = os.getenv("PASSWORD")
 
 def username_characters_error(request, *username):
     for user in username:

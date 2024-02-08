@@ -2,15 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage, send_mail
 import os
-from dotenv import load_dotenv
 from validators import *
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-
-# Email and password private
-load_dotenv()
-EMAIL = os.getenv("EMAIL")
-PASSWORD = os.getenv("PASSWORD")
 
 # Create your views here.
 def registro(request):

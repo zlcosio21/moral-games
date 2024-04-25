@@ -1,85 +1,97 @@
-from django.contrib import messages
-from django.contrib.auth.models import User
-import os
-from dotenv import load_dotenv
-from django.core.mail import EmailMessage
-from tienda.models import HistorialCompra
 from carrito.models import HistorialCompraCarrito
+from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
+from inventario.models import Videojuego
+from django.contrib import messages
+from django.db.models import Q
+from dotenv import load_dotenv
+import os
 
+
+# Environment Variables
 load_dotenv()
 EMAIL = os.getenv("EMAIL")
 PASSWORD = os.getenv("PASSWORD")
 
-def username_characters_error(request, *username):
-    for user in username:
-        if len(user) < 8:
-           return messages.error(request, "Debe contener minimo 8 caracteres", extra_tags="username_characters_error")
 
-def characters_error(request, *args):
-    for var in args:
-        if len(var) < 8:
-            return messages.error(request, "Debe contener minimo 8 caracteres", extra_tags="characters_error")
-
-def username_exist(request, new_username):
+# Authentication Validations
+def register_errors(request, username, email, password, password_confirm):
     user = request.user
-    exist = User.objects.filter(username=new_username).exclude(pk=user.pk).exists()
+    username_exist = User.objects.filter(username=username).exclude(pk=user.pk).exists()
+    email_exist = User.objects.filter(email=email).exclude(pk=user.pk).exists()
 
-    if exist:
-        return messages.error(request, "El nuevo nombre de usuario ya está en uso.", extra_tags="username_exist_error")
+    if username_exist:
+        messages.error(request, "El nombre de usuario ya está en uso.", extra_tags="username_exist_error")
 
-def password_invalid(request, password_actual):
-    user = request.user
+    if email_exist:
+        messages.error(request, "El correo ingresado ya está en uso", extra_tags="email_exist_error")
 
-    password_valida = user.check_password(password_actual)
-    if not password_valida:
-        return messages.error(request, "La contraseña actual es incorrecta, ingrese nuevamente", extra_tags="password_invalid")
+    if len(username) < 8:
+        messages.error(request, "Debe contener mínimo 8 caracteres", extra_tags="username_characters_error")
 
-def equals_error(request, password, password_confirm):
+    if len(password) < 8:
+        messages.error(request, "La contraseña debe contener mínimo 8 caracteres", extra_tags="password_characters_error")
 
     if password != password_confirm:
-        return messages.error(request, "Las contraseñas deben ser iguales. Ingrese nuevamente", extra_tags="equals_error")
+        messages.error(request, "Las contraseñas deben ser iguales. Ingrese nuevamente", extra_tags="equals_passwords_error")
 
-def isvalid(request, username, password, password_confirm):
-    user = request.user
-    exist = User.objects.filter(username=username).exclude(pk=user.pk).exists()
+    return username_exist or email_exist or len(username) < 8 or len(password) < 8 or password != password_confirm
 
-    if len(username) >= 8 and (len(password) >= 8 and len(password_confirm) >= 8) and password == password_confirm and not exist:
-        return True
 
-    return False
+# Stock Videogames Validations
+def stock_errors(request, videojuego, cantidad):
+    insufficient_stock = videojuego.cantidad < int(cantidad)
+    stock_sold_out = videojuego.cantidad < 1
 
-def validator_stock(videojuego, cantidad):
-    if videojuego.cantidad >= int(cantidad):
-        videojuego.cantidad -= int(cantidad)
-        videojuego.save()
+    if insufficient_stock:
+        messages.error(request, f"Solo se encuentran disponibles {videojuego.cantidad} unidades del videojuego", extra_tags="insufficient_stock")
 
-def stock_error(request, cantidad, videojuego):
-    if videojuego.cantidad < int(cantidad) or videojuego.cantidad < 0:
-        messages.error(request, f"Solo se encuentran disponibles {videojuego.cantidad} unidades del videojuego", extra_tags="stock_error")
-        return True
+    if stock_sold_out:
+        messages.error(request, f"Lo sentimos, actualmente esta entrega se encuentra agotada", extra_tags="stock_sold_out")
 
+    return insufficient_stock or stock_sold_out
+
+
+# Send of Emails
 def send_email_buy(request, videojuego, cantidad):
     total = (int(cantidad) * videojuego.precio)
 
-    email = EmailMessage("Mensaje desde MoralGames", f"El cliente {request.user}, a realizado la compra de {cantidad} copias de {videojuego.nombre}. El total de la compra es de ${total}", "", [request.user.email], reply_to=[EMAIL])
+    asunto = "Mensaje desde MoralGames, compra videojuego"
+    cuerpo_mensaje = f"El cliente {request.user}, a realizado la compra de {cantidad} copias de {videojuego.nombre}. El total de la compra es de ${total}"
+    destinatario = request.user.email
+
+    email = EmailMessage(asunto, cuerpo_mensaje, "", [destinatario], reply_to=[EMAIL])
     email.send()
 
-def save_order(request, videojuego, cantidad):
-    guardar_pedido = HistorialCompra.objects.create(usuario=request.user, videojuego=videojuego.nombre, cantidad=cantidad)
-    guardar_pedido.save()
 
+def send_email_buy_car(request, videojuegos, total):
+    asunto = "Mensaje desde MoralGames, compra carrito"
+    cuerpo_mensaje = f"El cliente {request.user}, ha realizado la compra de los siguientes videojuegos:\n\n"
+    destinatario = request.user.email
+
+    for videojuego in videojuegos:
+        cuerpo_mensaje += f"{videojuego}\n"
+
+    cuerpo_mensaje += f"\nEl total de la compra es de ${total}"
+
+    email = EmailMessage(asunto, cuerpo_mensaje, "", [destinatario], reply_to=[EMAIL])
+    email.send()
+
+
+# Save Historial of buy
 def save_order_car(request, videojuegos):
     videojuegos = ' '.join(videojuegos)
     guardar_pedido_carrito = HistorialCompraCarrito.objects.create(usuario=request.user, videojuego=videojuegos)
     guardar_pedido_carrito.save()
 
-def send_email_buy_car(request, lista_videojuegos, total):
-    cuerpo_correo = f"El cliente {request.user}, a realizado la compra de los siguientes videojuegos:\n\n"
 
-    for videojuego in lista_videojuegos:
-        cuerpo_correo += f"{videojuego}\n"
+# Search
+def search(busqueda):
 
-    cuerpo_correo += f"\n El total de la compra es de ${total}"
+    videojuegos = Videojuego.objects.filter(
+        Q(nombre__icontains=busqueda) |
+        Q(plataforma__nombre__icontains=busqueda) |
+        Q(genero__nombre__icontains=busqueda)
+    ).distinct()
 
-    email = EmailMessage("Mensaje desde MoralGames", cuerpo_correo, "", [request.user.email], reply_to=[EMAIL])
-    email.send()
+    return videojuegos

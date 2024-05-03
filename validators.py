@@ -23,11 +23,11 @@ def register_errors(request, username, email, password, password_confirm):
     if username_exist:
         messages.error(request, "El nombre de usuario ya está en uso.", extra_tags="username_exist_error")
 
-    if email_exist:
-        messages.error(request, "El correo ingresado ya está en uso", extra_tags="email_exist_error")
-
     if len(username) < 8:
         messages.error(request, "Debe contener mínimo 8 caracteres", extra_tags="username_characters_error")
+
+    if email_exist:
+        messages.error(request, "El correo ingresado ya está en uso", extra_tags="email_exist_error")
 
     if len(password) < 8:
         messages.error(request, "La contraseña debe contener mínimo 8 caracteres", extra_tags="password_characters_error")
@@ -43,11 +43,11 @@ def stock_errors(request, videojuego, cantidad):
     insufficient_stock = videojuego.cantidad < int(cantidad)
     stock_sold_out = videojuego.cantidad < 1
 
-    if insufficient_stock:
-        messages.error(request, f"Solo se encuentran disponibles {videojuego.cantidad} unidades del videojuego", extra_tags="insufficient_stock")
-
     if stock_sold_out:
         messages.error(request, f"Lo sentimos, actualmente esta entrega se encuentra agotada", extra_tags="stock_sold_out")
+
+    if insufficient_stock:
+        messages.error(request, f"Solo se encuentran disponibles {videojuego.cantidad} unidades del videojuego", extra_tags="insufficient_stock")
 
     return insufficient_stock or stock_sold_out
 

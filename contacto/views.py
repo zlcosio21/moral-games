@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
-from django.core.mail import EmailMessage
-from validators import EMAIL
+from validators import send_email_contact
+from django.shortcuts import render
+
 
 # Create your views here.
 def contacto(request):
@@ -9,7 +9,6 @@ def contacto(request):
         email = request.POST.get("email")
         mensaje = request.POST.get("message")
 
-        envio_email = EmailMessage("Mensaje desde MoralGames", "El usuario con nombre {} con la direccion {} escribe lo siguiente: \n\n {} ".format(nombre, email, mensaje), "",[EMAIL], reply_to=[email])
-        envio_email.send()
+        send_email_contact(nombre, email, mensaje)
 
     return render(request, "contacto/contacto.html")

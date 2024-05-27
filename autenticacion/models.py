@@ -1,3 +1,8 @@
-from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+class RegisterUser(User):
+    def create(user, username, email, password):
+        user = User.objects.create_user(username=username, email=email, password=password)
+        user.save()
+
+        return user

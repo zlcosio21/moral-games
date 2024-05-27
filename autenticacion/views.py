@@ -1,6 +1,7 @@
-from utils.validators import register_user, register_errors
 from django.contrib.auth import login, authenticate, logout
+from autenticacion.models import RegisterUser
 from django.shortcuts import render, redirect
+from utils.validators import register_errors
 from utils.emails import send_email_register
 from django.contrib import messages
 
@@ -17,7 +18,7 @@ def registro(request):
         if register_errors(request, username, email, password, password_confirm):
             return redirect("registro")
 
-        user = register_user(user, username, email, password)
+        user = RegisterUser.create(user, username, email, password)
 
         send_email_register(username, email)
 

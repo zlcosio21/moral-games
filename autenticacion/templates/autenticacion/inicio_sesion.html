@@ -8,7 +8,8 @@
 
   <div class="container" data-aos="fade-up">
 
-    <br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+
     <div class="section-header">
       <h2 style="color: white !important;">Inicia Sesion</h2>
     </div>
@@ -24,15 +25,15 @@
           {% if messages %} {% for message in messages %}
             <div class="text-danger" style="text-align: left;">{{message}}</div>
           {% endfor %} {% endif %}
-          
+
         </div>
 
         <div class="form-group col-md-6 mt-3 mt-md-0" style="margin: 25px;">
           <input type="password" class="form-control" name="password" id="email" placeholder="Contraseña" required>
         </div>
-        
+
         <a href="{% url 'inicio_sesion' %}"><div class="text-left"><button type="submit">Iniciar Sesion</button></div></a>
-        
+
       </form>
 
     </div>

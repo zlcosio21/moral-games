@@ -15,9 +15,7 @@ class Cart(Models):
 
     @classmethod
     def add_videogame(cls, request, videogame, quantity=1):
-        return cls.objects.create(
-            user=request.user, videogame=videogame, quantity=quantity
-        )
+        return cls.objects.create(user=request.user, videogame=videogame, quantity=quantity)
 
     @classmethod
     def get_user_cart(cls, request):
@@ -39,10 +37,7 @@ class Cart(Models):
 
     @staticmethod
     def get_videogames_in_cart(cart):
-        return [
-            f"{item.videogame.name} - {item.quantity} unidades - ${item.item_total()}."
-            for item in cart
-        ]
+        return [f"{item.videogame.name} - {item.quantity} unidades - ${item.item_total()}." for item in cart]
 
     @classmethod
     def delete_videogame(cls, request, videogame):
@@ -72,3 +67,25 @@ class Cart(Models):
 
     def __str__(self):
         return f"Usuario {self.user} - Producto {self.videogame.name} - {self.quantity} unidades"
+
+class ShoppingCartHistory(Models):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    videogames = models.CharField(max_length=5000)
+    total = models.SmallIntegerField(default=0)
+
+    @classmethod
+    def get_history_cart_user(cls, request):
+        return cls.objects.filter(user=request.user)
+
+    @classmethod
+    def save_order(cls, request, videogames, total):
+        videogames = " ".join(videogames)
+        save_order = cls.objects.create(user=request.user, videogames=videogames, total=total)
+        save_order.save()
+
+    def get_list_of_videogames(self):
+        return self.videogames.split(".")
+
+    def __str__(self):
+        return f"Pedido #{self.id} - {self.user} - {self.videogames} - Realizado {self.created.strftime('%d/%m/%Y %H:%M')}"

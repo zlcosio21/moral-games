@@ -1,0 +1,34 @@
+<tr>
+    <td class="nk-product-cart-thumb">
+        <a href="{% url 'ver_videojuego' item.videogame.id %}" class="nk-image-box-1 nk-post-image">
+            <img src="{{item.videogame.image.url}}" alt="{{item.videogame.name}}" width="115">
+        </a>
+    </td>
+    <td class="nk-product-cart-title">
+        <h5 class="h6">Videojuego</h5>
+        <div class="nk-gap-1"></div>
+        <h2 class="nk-post-title h4">
+            <a href="{% url 'ver_videojuego' item.videogame.id %}">{{item.videogame.name}}</a>
+        </h2>
+    </td>
+    <td class="nk-product-cart-price">
+        <h5 class="h6">Precio</h5>
+        <div class="nk-gap-1"></div>
+        <strong class="price-item">$ {{item.videogame.price}}</strong>
+    </td>
+    <td class="nk-product-cart-quantity">
+        <h5 class="h6">Cantidad</h5>
+        <div class="nk-gap-1"></div>
+        <strong class="price-item">{{item.quantity}}</strong>
+    </td>
+    <td class="nk-product-cart-total">
+        <h5 class="h6">Total</h5>
+        <div class="nk-gap-1"></div>
+        <strong class="price-item">$ {{item.item_total}}</strong>
+    </td>
+    <td class="nk-product-cart-remove">
+        <a href="{% url 'eliminar_del_carrito' item.videogame.id %}">
+            <span class="ion-android-close"></span>
+        </a>
+    </td>
+</tr>

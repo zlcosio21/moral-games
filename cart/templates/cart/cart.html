@@ -1,0 +1,70 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- START: Breadcrumbs -->
+<div class="nk-gap-1"></div>
+<div class="container">
+  <ul class="nk-breadcrumbs">
+    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+    <li><span class="fa fa-angle-right"></span></li>
+    <li><a href="{% url 'carrito' %}">Carrito</a></li>
+    <li><span>Carrito</span></li>
+  </ul>
+</div>
+<div class="nk-gap-1"></div>
+<!-- END: Breadcrumbs -->
+
+<div class="container">
+  <div class="nk-store nk-store-cart">
+    <div class="table-responsive">
+
+      <!-- START: Products in Cart -->
+      <table class="table nk-store-cart-products">
+        <tbody>
+          {% for item in cart %}
+            {% include "cart/card_videogame.html" %}
+          {% endfor %}
+        </tbody>
+      </table>
+      <!-- END: Products in Cart -->
+
+    </div>
+
+    <div class="nk-gap-1"></div>
+
+    <a class="nk-btn nk-btn-rounded nk-btn-color-white float-right" data-toggle="modal" data-target="#modalUpdateCart" href="#">
+      Actualizar carrito
+    </a>
+
+    <div class="clearfix"></div>
+    <div class="nk-gap-2"></div>
+
+    <!-- START: Buy Cart -->
+    <div class="row vertical-gap">
+      <div class="col-md-6">
+        {% include "cart/buy_cart.html" %} <!-- Direction -->
+      </div>
+      <div class="col-md-6">
+        {% include "cart/total_cost.html" %} <!-- Account Total -->
+      </div>
+    </div>
+    <!-- END: Buy Cart -->
+
+    <div class="nk-gap-2"></div>
+    <div class="clearfix"></div>
+
+  </div>
+</div>
+
+<div class="nk-gap-2"></div>
+
+{% include "cart/update_cart.html" %} <!-- Modal Update Cart -->
+
+<img class="nk-page-background-top" src="{% static 'assets/img/cart.png' %}" alt="">
+
+<script src="{% static 'assets/js/limitQuantity.js' %}"></script>
+
+{% endblock %}

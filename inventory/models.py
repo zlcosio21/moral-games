@@ -29,3 +29,25 @@ class Platform(Models):
 
     def __str__(self):
         return self.name
+
+
+class Genre(Models):
+    name = models.CharField(unique=True, max_length=50, null=False)
+
+    @classmethod
+    def get(cls, name):
+        if name is None:
+            return cls.get_random_genre()
+
+        return cls.objects.get(name=name)
+
+    @classmethod
+    def get_all_genres(cls):
+        return cls.objects.all().order_by("?")
+
+    @classmethod
+    def get_random_genre(cls):
+        return cls.objects.all().order_by("?").first()
+
+    def __str__(self):
+        return self.name

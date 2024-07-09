@@ -28,3 +28,15 @@ def home(request):
     }
 
     return render(request, "home/home.html", context)
+
+
+@require_POST
+def contact(request):
+    nombre = request.POST.get("name")
+    email = request.POST.get("email")
+    mensaje = request.POST.get("message")
+
+    send_email_contact(nombre, email, mensaje)
+    success_message(request, "message_contact", "message_contact")
+
+    return redirect("inicio")

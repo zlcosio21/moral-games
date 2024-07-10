@@ -1,33 +1,80 @@
-{% extends "MoralGamesApp/base.html" %}
+{% extends "home/base.html" %}
 
 {% load static %}
 
 {% block content %}
 
-<section id="hotels" class="section-with-bg">
 
-  <div class="container" data-aos="fade-up">
-    <div class="section-header">
-      <h2 style="color: white;">Blogs</h2>
-    </div>
+<!-- START: Breadcrumbs -->
+<div class="nk-gap-1"></div>
+<div class="container">
+  <ul class="nk-breadcrumbs">
+    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+    <li><span class="fa fa-angle-right"></span></li>
+    <li><a href="{% url 'blog' %}">Blog</a></li>
+    <li><span class="fa fa-angle-right"></span></li>
+    <li><span>Posts</span></li>
+  </ul>
+</div>
+<div class="nk-gap-1"></div>
+<!-- END: Breadcrumbs -->
 
-    <div class="row" data-aos="fade-up" data-aos-delay="100">
 
-      {% for post in posts %}
+<div class="container">
+  <div class="row vertical-gap">
+    <div class="col-lg-8">
+      <div class="nk-blog-list">
 
-        <div class="col-lg-3 col-md-8">
-          <div class="hotel">
-            <div class="hotel-img">
-              <img src="{{post.imagen.url}}" alt="Hotel 1" class="img-blog">
+        {% for post in posts %}
+        <div class="nk-blog-post">
+          <div class="row vertical-gap">
+
+            <div class="col-md-5 col-lg-6">
+              <a href="{% url 'ver_post' post.id %}" class="nk-post-img">
+                <img src="{{post.image.url}}" alt="{{post.title}}">
+                <span class="nk-post-comments-count">{{post.get_count_of_comments}}</span>
+              </a>
             </div>
-            <h3>{{post.titulo}}</h3>
-            <p>{{post.contenido}}</p>
+
+            <div class="col-md-7 col-lg-6">
+              <h2 class="nk-post-title h4">
+                <a href="{% url 'ver_post' post.id %}">{{post.title}}</a>
+              </h2>
+              <div class="nk-post-text">
+                <p>{{post.get_content_posts_list}}</p>
+              </div>
+
+              <div class="nk-post-by">
+                <img src="{% static 'assets/img/avatar-default.jpg' %}" alt="{{post.author.username}}"
+                  class="rounded-circle" width="35">
+                por
+                <a href="#">{{post.author.username}}</a>
+                en {{post.created|date:"F j, Y"}}
+              </div>
+            </div>
+
           </div>
         </div>
+        {% endfor %}
 
-      {% endfor %}
+      </div>
+      <!-- END: Posts List -->
+
     </div>
 
+    <!-- START: Sidebar -->
+    <div class="col-lg-4">
+      <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
+        {% include "store/sidebar.html" %}
+      </aside>
+    </div>
+    <!-- END: Sidebar -->
+
   </div>
-</section>
+</div>
+
+<div class="nk-gap-2"></div>
+
+<img class="nk-page-background-top" src="{% static 'assets/img/blog.png' %}" alt="">
+
 {% endblock %}

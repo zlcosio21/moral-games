@@ -6,13 +6,36 @@ from inventory.models import Genre
 from django.db import models
 
 
+# Create your models here
+class Comment(Models):
+    content = models.CharField(max_length=500, null=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    BELONGS_TO_CHOICES = [
+        ("Videojuego", "Videojuego"),
+        ("Post", "Post")
+    ]
+
+    belongs_to = models.CharField(max_length=20, choices=BELONGS_TO_CHOICES, default="Ninguno")
+
+    @classmethod
+    def create(cls, request, comment_content):
+        return cls.objects.create(content=comment_content, author=request.user, belongs_to="Videojuego")
+
+    def __str__(self):
+        if len(self.content) > 50:
+            return f"#{self.id} - Pertenece a {self.belongs_to} - Autor {self.author.username} - {self.content[:50]}..."
+
+        return f"#{self.id} - Pertenece a {self.belongs_to} - Autor {self.author.username} - {self.content}"
+
+
 class Post(Models):
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to="blog", null=False, blank=False)
     content = models.CharField(max_length=500, null=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
-
+    comments = models.ManyToManyField(Comment, blank=True)
 
     @classmethod
     def get(cls, id):

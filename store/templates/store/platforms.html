@@ -1,0 +1,49 @@
+{% load static %}
+
+<div class="row vertical-gap">
+    <div class="col-lg-4">
+        <div class="nk-feature-1">
+            <div class="nk-feature-icon">
+                <img src="{% static 'assets/img/icon-mouse.png' %}">
+            </div>
+            <div class="nk-feature-cont">
+                <h3 class="nk-feature-title">
+                    <a href="{% url 'ver_plataforma_videojuego' 'pc' %}">PC</a>
+                </h3>
+                <h3 class="nk-feature-title text-main-1">
+                    <a href="{% url 'ver_plataforma_videojuego' 'pc' %}">View Games</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="nk-feature-1">
+            <div class="nk-feature-icon">
+                <img src="{% static 'assets/img/icon-ps.png' %}">
+            </div>
+            <div class="nk-feature-cont">
+                <h3 class="nk-feature-title">
+                    <a href="{% url 'ver_plataforma_videojuego' 'PS4' %}">PS4</a>
+                </h3>
+                <h3 class="nk-feature-title text-main-1">
+                    <a href="{% url 'ver_plataforma_videojuego' 'PS4' %}">View Games</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="nk-feature-1">
+            <div class="nk-feature-icon">
+                <img src="{% static 'assets/img/icon-xbox.png' %}">
+            </div>
+            <div class="nk-feature-cont">
+                <h3 class="nk-feature-title">
+                    <a href="{% url 'ver_plataforma_videojuego' 'Xbox one' %}">Xbox</a>
+                </h3>
+                <h3 class="nk-feature-title text-main-1">
+                    <a href="{% url 'ver_plataforma_videojuego' 'Xbox one' %}">View Games</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>

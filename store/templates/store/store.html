@@ -1,0 +1,191 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<!-- START: Breadcrumbs -->
+<div class="nk-gap-1"></div>
+<div class="container">
+  <ul class="nk-breadcrumbs">
+    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+    <li><span class="fa fa-angle-right"></span></li>
+    <li><span>Tienda</span></li>
+  </ul>
+</div>
+<div class="nk-gap-1"></div>
+<!-- END: Breadcrumbs -->
+
+
+<div class="container">
+  <!-- START: Platforms -->
+  {% include "store/platforms.html" %}
+  <!-- END: Platforms -->
+
+  <!-- START: Some Products -->
+  <div class="nk-gap-2"></div>
+
+  <div class="row vertical-gap">
+    {% for videogame in main_videogames %}
+    {% if forloop.first %}
+    <div class="col-md-6 col-lg-4">
+      <div class="nk-gallery-item-box">
+        <a href="{% url 'ver_videojuego' videogame.id %}" class="nk-gallery-item">
+          <span class="nk-gallery-item-overlay"><span><span class="nk-icon-circles"></span></span></span>
+          <img src="{{videogame.image.url}}" alt="{{videogame.name}}" class="img-large">
+        </a>
+        <div class="nk-gallery-item-label">
+          <h4 class="mb-0">{{videogame.name}}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-4">
+      <div class="row vertical-gap">
+        {% elif forloop.last %}
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-4 order-lg-3">
+      <div class="nk-gallery-item-box">
+        <a href="{% url 'ver_videojuego' videogame.id %}" class="nk-gallery-item">
+          <span class="nk-gallery-item-overlay"><span><span class="nk-icon-circles"></span></span></span>
+          <img src="{{videogame.image.url}}" alt="{{videogame.name}}" class="img-large">
+        </a>
+        <div class="nk-gallery-item-label">
+          <h4 class="mb-0">{{videogame.name}}</h4>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="col-md-6">
+      <div class="nk-gallery-item-box">
+        <a href="{% url 'ver_videojuego' videogame.id %}" class="nk-gallery-item">
+          <span class="nk-gallery-item-overlay"><span><span class="nk-icon-circles"></span></span></span>
+          <img src="{{videogame.image.url}}" alt="{{videogame.name}}" class="img-small">
+        </a>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  <!-- END: Some Products -->
+
+  <!-- START: Top 10 Best Sellers -->
+  <div class="nk-gap-3"></div>
+  <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Top 10</span> Mas vendidos</span></h3>
+  <div class="nk-gap"></div>
+  <div class="nk-carousel nk-carousel-x4" data-autoplay="5000" data-dots="false" data-cell-align="left"
+    data-arrows="true">
+    <div class="nk-carousel-inner">
+      {% for videogame in best_videogames %}
+      <div>
+        <div class="pl-5 pr-5">
+          <div class="nk-product-cat-3">
+            <a class="nk-product-image" href="{% url 'ver_videojuego' videogame.id %}">
+              <img src="{{videogame.image.url}}" class="img-best-sellers" alt="{{videogame.name}}">
+            </a>
+            <div class="nk-product-cont">
+              <div class="nk-gap-1"></div>
+              <h3 class="nk-product-title h5">
+                <a href="{% url 'ver_videojuego' videogame.id %}">{{videogame.name}}</a>
+              </h3>
+              <div class="nk-gap-1"></div>
+              <div class="nk-product-price">$ {{videogame.price}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- END: Top 10 Best Sellers -->
+
+  <!-- START: Featured Games -->
+  <div class="nk-gap-3"></div>
+  <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Juegos</span> Destacados</span></h3>
+  <div class="nk-gap"></div>
+  <div class="row vertical-gap">
+
+    {% for videogame in featured_videogames %}
+    <div class="col-lg-6">
+      <div class="nk-product-cat-2">
+        <a class="nk-product-image" href="{% url 'ver_videojuego' videogame.id %}">
+          <img src="{{videogame.image.url}}" class="img-featured-games" alt="{{videogame.name}}">
+        </a>
+        <div class="nk-product-cont">
+          <h3 class="nk-product-title h5">
+            <a href="{% url 'ver_videojuego' videogame.id %}">{{videogame.name}}</a>
+          </h3>
+          <div class="nk-gap-1"></div>
+          <div class="nk-product-rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="{{videogame.get_random_star}}"></i>
+          </div>
+          <div class="nk-gap-1"></div>
+          {{videogame.get_description_featured_game}}
+          <div class="nk-gap-2"></div>
+          <div class="nk-product-price">$ {{videogame.price}}</div>
+          <div class="nk-gap-1"></div>
+          {% if user.is_authenticated %}
+          <a href="{% url 'agregar_al_carrito' videogame.id %}"
+            class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
+            Agregar Al carrito
+          </a>
+          {% else %}
+          <a href="#" data-toggle="modal" data-target="#modalLogin"
+            class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
+            Agregar Al carrito
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+  <!-- END: Featured Games -->
+
+  <!-- START: Most Popular -->
+  <div class="nk-gap-3"></div>
+  <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Mas</span> Populares</span></h3>
+  <div class="nk-gap"></div>
+  <div class="row vertical-gap">
+
+    {% for videogame in popular_videogames %}
+    <div class="col-lg-4 col-md-6">
+      <div class="nk-product-cat">
+        <a class="nk-product-image" href="{% url 'ver_videojuego' videogame.id %}">
+          <img src="{{videogame.image.url}}" class="img-most-populars" alt="{{videogame.name}}">
+        </a>
+        <div class="nk-product-cont">
+          <h3 class="nk-product-title h5">
+            <a href="{% url 'ver_videojuego' videogame.id %}">{{videogame.name}}</a>
+          </h3>
+          <div class="nk-gap-1"></div>
+          <div class="nk-product-rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="{{videogame.get_random_star}}"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <div class="nk-gap-1"></div>
+          <div class="nk-product-price">$ {{videogame.price}}</div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+  <!-- END: Most Popular -->
+</div>
+
+<div class="nk-gap-2"></div>
+
+<img class="nk-page-background-top" src="{% static 'assets/img/store.png' %}" alt="">
+
+{% endblock %}

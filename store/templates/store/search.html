@@ -1,0 +1,131 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- START: Breadcrumbs -->
+<div class="nk-gap-1"></div>
+<div class="container">
+  <ul class="nk-breadcrumbs">
+    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+    <li><span class="fa fa-angle-right"></span></li>
+    <li><a href="{% url 'tienda' %}">Tienda</a></li>
+    <li><span class="fa fa-angle-right"></span></li>
+    <li><a href="#">Buscar</a></li>
+    <li><span>{{search}}</span></li>
+  </ul>
+</div>
+<div class="nk-gap-1"></div>
+<!-- END: Breadcrumbs -->
+
+
+<div class="container">
+  <!-- START: Platform Icons -->
+  <div class="nk-gap-0"></div>
+  {% include "store/platforms.html" %}
+  <!-- END: Platform Icons -->
+
+  <!-- START: Products Filter -->
+  <div class="nk-gap-2"></div>
+  <div class="row vertical-gap">
+    <div class="col-lg-8">
+      <div class="row vertical-gap">
+        <div class="col-md-4">
+          <select class="form-control">
+            <option value="" disabled selected>Selecciona Plataforma</option>
+            {% for platform in all_platforms %}
+            <option value="{{platform}}">{{platform}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-8">
+          <form action="{% url 'buscar_por_precio' %}" method="post" role="form">
+            {% csrf_token %}
+            <div class="nk-input-slider-inline">
+              <div class="nk-input-slider">
+                <div class="nk-input-slider-content text-white">
+                  Precio:
+                  <strong class="text-main-1">$ <span class="nk-input-slider-value-0"></span></strong>
+                  -
+                  <strong class="text-main-1">$ <span class="nk-input-slider-value-1"></span></strong>
+                </div>
+                <div class="nk-input-slider-input">
+                  <input type="text" name="search" data-slider-min="0" data-slider-max="1800" data-slider-step="1"
+                    data-slider-value="[200, 1200]" data-slider-tooltip="hide">
+                </div>
+              </div>
+              <div>
+                <button class="nk-btn nk-btn-rounded nk-btn-color-white"
+                  type="submit">Aplicar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <form action="{% url 'buscar' %}" method="post" role="form" class="nk-form">
+        {% csrf_token %}
+        <div class="input-group">
+          <input type="text" name="search" class="form-control" placeholder="Escribe Algo..." required maxlength="40">
+          <button class="nk-btn nk-btn-color-main-1" type="submit">
+            <span class="ion-search"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- END: Products Filter -->
+
+  <div class="nk-gap-2"></div>
+  <!-- START: Products -->
+  <div class="row vertical-gap">
+
+    {% for videogame in videogames %}
+    <div class="col-lg-6">
+      <div class="nk-product-cat-2">
+        <a class="nk-product-image" href="{% url 'ver_videojuego' videogame.id %}">
+          <img src="{{videogame.image.url}}" class="img-featured-games" alt="{{videogame.name}}">
+        </a>
+        <div class="nk-product-cont">
+          <h3 class="nk-product-title h5">
+            <a href="{% url 'ver_videojuego' videogame.id %}">{{videogame.name}}</a>
+          </h3>
+          <div class="nk-gap-1"></div>
+          <div class="nk-product-rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="{{videogame.get_random_star}}"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <div class="nk-gap-1"></div>
+          {{videogame.get_description_featured_game}}
+          <div class="nk-gap-2"></div>
+          <div class="nk-product-price">$ {{videogame.price}}</div>
+          <div class="nk-gap-1"></div>
+          {% if user.is_authenticated %}
+          <a href="{% url 'agregar_al_carrito' videogame.id %}"
+            class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
+            Agregar Al carrito
+          </a>
+          {% else %}
+          <a href="#" data-toggle="modal" data-target="#modalLogin"
+            class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
+            Agregar Al carrito
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+<div class="nk-gap-2"></div>
+
+<img class="nk-page-background-top" src="{% static 'assets/img/store_videogame.png' %}">
+
+{% endblock %}

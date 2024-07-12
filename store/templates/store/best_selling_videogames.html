@@ -1,0 +1,25 @@
+<div class="row vertical-gap">
+    {% for videogame in best_selling_videogames %}
+    <div class="col-md-6">
+        <div class="nk-product-cat">
+            <a class="nk-product-image" href="{% url 'ver_videojuego' videogame.id %}">
+                <img src="{{videogame.image.url}}" class="img-related-videogame" alt="{{videogame.name}}">
+            </a>
+            <div class="nk-product-cont">
+                <h3 class="nk-product-title h5"><a href="store-product.html">{{videogame.name}}</a>
+                </h3>
+                <div class="nk-gap-1"></div>
+                <div class="nk-product-rating" data-rating="3">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="{{videogame.get_random_star}}"></i>
+                    <in class="far fa-star"></i>
+                </div>
+                <div class="nk-gap-1"></div>
+                <div class="nk-product-price">$ {{videogame.price}}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

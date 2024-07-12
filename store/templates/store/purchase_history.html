@@ -1,0 +1,54 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+  <div class="nk-store nk-store-checkout">
+      <!-- START: Purchase History -->
+      <div class="nk-gap-1"></div>
+      <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Historial</span> De Compras</span></h3>
+      <div class="table-responsive">
+          <table class="nk-table nk-table-sm">
+              <thead class="thead-default">
+                  <tr>
+                      <th class="nk-product-cart-title">Pedido</th>
+                      <th class="nk-product-cart-total">Videojuegos</th>
+                      <th class="nk-product-cart-total">Relizado</th>
+                      <th class="nk-product-cart-total">Total</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for purchase in purchase_history %}
+                  <tr>
+                      <td class="nk-product-cart-title">
+                        Pedido #{{purchase.id}}
+                      </td>
+                      <td class="nk-product-cart-title">
+                          {% for videogame in purchase.get_list_of_videogames %}
+                           <span class="d-flex flex-column">{{videogame}}</span>
+                          {% endfor %}
+                      </td>
+                      <td class="nk-product-cart-title">
+                        {{purchase.created|date:"F j, Y"}}
+                    </td>
+                      <td class="nk-product-cart-total">
+                          $ {{purchase.total}}
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+      <!-- END: Purchase History -->
+
+      <div class="nk-gap-2"></div>
+  </div>
+</div>
+<div class="nk-gap-2"></div>
+
+<img class="nk-page-background-top" src="{% static 'assets/img/store_videogame.png' %}">
+
+{% endblock %}

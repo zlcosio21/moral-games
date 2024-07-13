@@ -1,0 +1,36 @@
+{% load static %}
+
+{% if messages %}
+
+<div class="nk-modal modal fade" id="modalError" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="ion-android-close"></span>
+                </button>
+
+                {% for message in messages %}
+                    {% if forloop.first and "cart" in message.tags %}
+                        <h4 class="mb-0"><span class="text-main-1">Carrito</span> Accion Exitosa</h4>
+                    {% elif forloop.first and "message_contact" in message.tags %}
+                        <h4 class="mb-0"><span class="text-main-1">Contacto</span> Envio Existoso</h4>
+                    {% elif forloop.first %}
+                        <h4 class="mb-0"><span class="text-main-1">Error</span> Leer Atentamente</h4>
+                    {% endif %}
+                {% endfor %}
+
+                <div class="nk-gap-1"></div>
+
+                {% for message in messages %}
+                    <small>{{ message }}</small><br>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assets/js/error-modal.js' %}"></script>
+
+{% endif %}

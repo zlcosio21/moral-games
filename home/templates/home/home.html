@@ -1,0 +1,91 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+  <div class="nk-gap-2"></div>
+
+  <!-- START: Image Slider -->
+  {% include "home/slider_images.html" %}
+  <!-- END: Image Slider -->
+
+  <div class="nk-gap-2"></div>
+
+  <!-- START: Platforms Icons -->
+  {% include "store/platforms.html" %}
+  <!-- END: Platforms Icons -->
+
+  <div class="nk-gap-2"></div>
+
+  <!-- START: Latest News -->
+  {% include "blog/latest_news.html" %}
+  <!-- START: End Latest News -->
+
+  <div class="nk-gap-2"></div>
+
+  <!-- START: Main Latest News -->
+  {% include "blog/main_latest_news.html" %}
+  <!-- END: Main Latest News -->
+
+  <div class="nk-gap-2"></div>
+
+  <div class="row vertical-gap">
+    <div class="col-lg-8">
+
+      <!-- START: Latest Posts -->
+      {% include "blog/latest_posts.html" %}
+      <!-- END: Latest Posts -->
+
+      <div class="nk-gap-3"></div>
+
+      <!-- START: Tabbed News  -->
+      {% include "blog/tabbed_news.html" %}
+      <!-- END: Tabbed News -->
+
+      <div class="nk-gap"></div>
+
+      <!-- START: Latest Pictures -->
+      <h2 class="nk-decorated-h-2 h3">
+        <span><span class="text-main-1">Últimas</span> Imágenes</span>
+      </h2>
+
+      <div class="nk-gap"></div>
+
+      <div class="nk-popup-gallery">
+        {% include "gallery/latest_pictures.html" %}
+      </div>
+      <!-- END: Latest Pictures -->
+
+      <div class="nk-gap-3"></div>
+
+      <!-- START: Best Selling -->
+      <h3 class="nk-decorated-h-2">
+        <span><span class="text-main-1">Mas</span> Vendidos</span>
+      </h3>
+
+      <div class="nk-gap"></div>
+
+      {% include "store/best_selling_videogames.html" %}
+      <!-- END: Best Selling -->
+
+    </div>
+
+    <!-- START: Sidebar -->
+    <div class="col-lg-4">
+      <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
+        {% include "store/sidebar.html" %}
+      </aside>
+    </div>
+    <!-- END: Sidebar -->
+
+  </div>
+</div>
+
+<div class="nk-gap-4"></div>
+
+<img class="nk-page-background-top" src="{% static 'assets/img/home.png' %}" alt="">
+
+{% endblock %}

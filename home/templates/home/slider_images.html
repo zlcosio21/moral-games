@@ -1,0 +1,13 @@
+<div class="nk-image-slider" data-autoplay="8000">
+
+    {% for item in slider %}
+    <div class="nk-image-slider-item">
+        <img src="{{item.image_url}}" class="nk-image-slider-img" data-thumb="{{item.image_url}}">
+        <div class="nk-image-slider-content">
+            <h3 class="h4">{{item.title}}</h3>
+            <p class="text-white">{{item.content}}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>

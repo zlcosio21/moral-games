@@ -1,5 +1,5 @@
 from django.views.decorators.http import require_POST
-from utils.latest_pictures import get_latest_pictures
+from utils.pictures import get_latest_pictures
 from django.shortcuts import render, redirect
 from utils.emails import send_email_contact
 from utils.messages import success_message

@@ -1,0 +1,32 @@
+<div class="nk-reply">
+    <form action="{% url 'agregar_comentario_a_videojuego' videogame.id %}" method="post" role="form" class="nk-form">
+        {% csrf_token %}
+
+        <textarea class="form-control required" maxlength="400" name="comment_content" rows="5" placeholder="Tu comentario *"
+            aria-required="true"></textarea>
+
+        <div class="nk-gap-1"></div>
+
+        <div class="nk-rating">
+            {% for number in "54321"|make_list %}
+            <input type="radio" id="review-rate-{{number}}" name="review-rate" value="{{number}}">
+            <label for="review-rate-{{number}}">
+                <span><i class="far fa-star"></i></span>
+                <span><i class="fa fa-star"></i></span>
+            </label>
+            {% endfor %}
+        </div>
+
+        {% if user.is_authenticated %}
+            <button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 float-right">
+                Agregar Comentario
+            </button>
+        {% else %}
+            <a class="nk-btn nk-btn-rounded nk-btn-color-dark-3 float-right" href="#" data-toggle="modal"
+                data-target="#modalLogin">
+                Agregar Comentario
+            </a>
+        {% endif %}
+
+    </form>
+</div>

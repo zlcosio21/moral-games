@@ -1,0 +1,32 @@
+{% load static %}
+
+<div class="nk-comments">
+    {% for comment in videogame.comments.all %}
+    <div class="nk-comment">
+        <div class="nk-comment-meta">
+
+            <img src="{% static 'assets/img/avatar-default.jpg' %}" alt="{{comment.author.username}}"
+                class="rounded-circle" width="35">
+            de
+            <a href="#">
+                {{comment.author.username}}
+            </a>
+            en {{comment.created|date:"F j, Y"}}
+
+            <div class="nk-review-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="{{videogame.get_random_star}}"></i>
+            </div>
+
+        </div>
+
+        <div class="nk-comment-text">
+            <p>{{comment.content}}</p>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>

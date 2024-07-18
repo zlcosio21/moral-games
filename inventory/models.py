@@ -1,5 +1,5 @@
 from moral_games.base_models import Models
-from django.db.models import Q
+from django.db.models import Q, Value
 from django.db import models
 import random
 
@@ -42,12 +42,28 @@ class Genre(Models):
         return cls.objects.get(name=name)
 
     @classmethod
-    def get_all_genres(cls):
+    def get_by_id(cls, id):
+        return cls.objects.get(id=id)
+
+    @classmethod
+    def get_all_genres(cls, limit=0):
+        if limit > 0:
+            return cls.objects.all().order_by("?")[:limit]
+
         return cls.objects.all().order_by("?")
 
     @classmethod
     def get_random_genre(cls):
         return cls.objects.all().order_by("?").first()
+
+    def get_random_picture_of_the_genre(self):
+        return Videogame.get_pictures_by_genre(self)
+
+    @staticmethod
+    def get_all_pictures(pictures_videogames, pictures_posts):
+        all_pictures = list(pictures_videogames.union(pictures_posts))
+
+        return random.sample(all_pictures, len(all_pictures))
 
     def __str__(self):
         return self.name
@@ -86,6 +102,19 @@ class Videogame(Models):
         self.comments.add(comment)
 
     @classmethod
+    def get_pictures_by_genre(cls, genre, limit=1, all=False):
+        if all:
+            query = cls.objects.filter(genre=genre).values("name", "image", "description")
+            query = query.annotate(type=Value("videogame"))
+
+            return query
+
+        if limit > 1:
+            return cls.objects.filter(genre=genre).values("image").order_by("?")[:limit]
+
+        return cls.objects.filter(genre=genre).values("image").order_by("?").first()
+
+    @classmethod
     def get(cls, id):
         return cls.objects.get(id=id)
 
@@ -95,6 +124,13 @@ class Videogame(Models):
             return cls.objects.all().order_by("?")[:limit]
 
         return cls.objects.all().order_by("?").first()
+
+    @classmethod
+    def get_random_name_videogames(cls, limit=1):
+        if limit > 1:
+            return cls.objects.all().values("name").order_by("?")[:limit]
+
+        return cls.objects.all().values("name").order_by("?").first()
 
     @classmethod
     def get_videogames_by_genre(cls, genre, limit=1):
@@ -109,6 +145,13 @@ class Videogame(Models):
             return cls.objects.filter(platform=platform).order_by("?")[:limit]
 
         return cls.objects.filter(platform=platform).order_by("?").first()
+
+    @classmethod
+    def get_latest_pictures(cls):
+        query = cls.objects.all().values("name", "image", "description", "created")
+        query = query.annotate(type=Value("videogame"))
+
+        return query
 
     @classmethod
     def search(cls, search):

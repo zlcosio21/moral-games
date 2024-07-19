@@ -1,0 +1,165 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<!-- START: Breadcrumbs -->
+<div class="nk-gap-1"></div>
+<div class="container">
+    <ul class="nk-breadcrumbs">
+        <li><a href="index.html">Home</a></li>
+        <li><span class="fa fa-angle-right"></span></li>
+        <li><a href="#">Blog</a></li>
+        <li><span class="fa fa-angle-right"></span></li>
+        <li><span>{{post.title}}</span></li>
+    </ul>
+</div>
+<div class="nk-gap-1"></div>
+<!-- END: Breadcrumbs -->
+
+
+<div class="container">
+    <div class="row vertical-gap">
+        <div class="col-lg-8">
+            <div class="nk-blog-post nk-blog-post-single">
+                <div class="nk-post-text mt-0">
+
+                    <div class="nk-post-img">
+                        <img src="{{post.image.url}}" alt="{{post.title}}">
+                    </div>
+
+                    <div class="nk-gap-1"></div>
+
+                    <h1 class="nk-post-title h4">{{post.title}}</h1>
+                    <div class="nk-post-by">
+                        <img src="{% static 'assets/img/avatar-default.jpg' %}" alt="{{post.author.username}}" class="rounded-circle"
+                            width="35">
+                        de
+                        <a href="#">
+                            {{post.author.username}}
+                        </a>
+                        en {{post.created|date:"F j, Y"}}
+                        <div class="nk-post-categories">
+                            <span class="bg-main-{{post.get_color_genre}}">{{post.genre.name}}</span>
+                        </div>
+                    </div>
+
+                    <div class="nk-gap"></div>
+                    <p>{{post.content}}</p>
+                    <div class="nk-gap"></div>
+
+                    <blockquote class="nk-blockquote">
+                        <div class="nk-blockquote-icon"><span>"</span></div>
+                        <div class="nk-blockquote-content">
+                            {{citation.content}}
+                        </div>
+                        <div class="nk-blockquote-author">
+                            <span>{{citation.author}}</span>
+                        </div>
+                    </blockquote>
+
+                    <div class="nk-gap"></div>
+
+                    <div class="nk-post-share">
+                        <span class="h5">Compartir Post:</span>
+                        <ul class="nk-social-links-2">
+                            {% include "home/links.html" %}
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- END: Post Text -->
+
+                <div class="nk-gap-2"></div>
+
+                <!-- START: Similar Articles -->
+                <h3 class="nk-decorated-h-2">
+                    <span><span class="text-main-1">Posts</span> Similares</span>
+                </h3>
+
+                <div class="nk-gap"></div>
+
+                <div class="row">
+                    {% for post in similar_posts %}
+                    <div class="col-md-6">
+                        <div class="nk-blog-post">
+                            <a href="{% url 'ver_post' post.id %}" class="nk-post-img">
+                                <img src="{{post.image.url}}" alt="{{post.title}}">
+                                <span class="nk-post-comments-count">{{post.get_count_of_comments}}</span>
+                                <span class="nk-post-categories">
+                                    <span class="bg-main-{{post.get_color_genre}}">{{post.genre.name}}</span>
+                                </span>
+                            </a>
+                            <div class="nk-gap"></div>
+                            <h2 class="nk-post-title h4">
+                                <a href="{% url 'ver_post' post.id %}">{{post.title}}</a>
+                            </h2>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- END: Similar Articles -->
+
+                <!-- START: Comments -->
+                <div id="comments"></div>
+
+                <h3 class="nk-decorated-h-2">
+                    <span><span class="text-main-1">{{post.get_count_of_comments}}</span> Comentarios</span>
+                </h3>
+
+                <div class="nk-gap"></div>
+
+                <div class="nk-comments">
+                    {% for comment in post.comments.all %}
+                    <div class="nk-comment">
+                        <div class="nk-comment-meta">
+                            <img src="{% static 'assets/img/avatar-default.jpg' %}" alt="{{post.title}}"
+                                class="rounded-circle" width="35">
+                            por
+                            <a href="#">
+                                {{comment.author.username}}
+                            </a>
+                            en {{comment.created|date:"F j, Y"}}
+                        </div>
+                        <div class="nk-comment-text">
+                            <p>{{comment.content}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- END: Comments -->
+
+                <div class="nk-gap-2"></div>
+
+                <!-- START: Reply -->
+                <h3 class="nk-decorated-h-2">
+                    <span><span class="text-main-1">Deja</span> un comentario</span>
+                </h3>
+
+                <div class="nk-gap"></div>
+
+                {% include "blog/add_comment_post.html" %}
+                <!-- END: Reply -->
+
+            </div>
+            <!-- END: Post -->
+        </div>
+
+        <!-- START: Sidebar -->
+        <div class="col-lg-4">
+            <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
+                {% include "store/sidebar.html" %}
+            </aside>
+        </div>
+        <!-- END: Sidebar -->
+
+    </div>
+</div>
+
+<div class="nk-gap-2"></div>
+
+<img class="nk-page-background-top" src="{% static 'assets/img/blog.png' %}" alt="">
+
+{% endblock %}

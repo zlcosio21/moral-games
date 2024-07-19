@@ -1,0 +1,56 @@
+<h3 class="nk-decorated-h-2">
+    <span><span class="text-main-1">Ultimas</span> Noticias</span>
+</h3>
+
+<div class="nk-gap"></div>
+
+<div class="nk-news-box">
+    <div class="nk-news-box-list">
+        <div class="nano">
+            <div class="nano-content">
+                {% for post in latest_news %}
+                <div class="nk-news-box-item nk-news-box-item-active">
+
+                    <div class="nk-news-box-item-img">
+                        <img src="{{post.image.url}}" class="img-small-latest-news" alt="{{post.title}}">
+                    </div>
+
+                    <img src="{{post.image.url}}" alt="{{post.title}}" class="nk-news-box-item-full-img">
+
+                    <h3 class="nk-news-box-item-title">{{post.title}}</h3>
+
+                    <span class="nk-news-box-item-categories">
+                        <span class="bg-main-{{post.get_color_genre}}">{{post.genre.name}}</span>
+                    </span>
+
+                    <div class="nk-news-box-item-text">
+                        <p>{{post.content}}</p>
+                    </div>
+
+                    <a href="{% url 'ver_post' post.id %}" class="nk-news-box-item-url">Leer Mas</a>
+
+                    <div class="nk-news-box-item-date">
+                        <span class="fa fa-calendar"></span> {{post.created|date:"F j, Y"}}
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="nk-news-box-each-info">
+        <div class="nano">
+            <div class="nano-content">
+                <div class="nk-news-box-item-image">
+                    <img><span class="nk-news-box-item-categories"><span class="bg-main-4"></span></span>
+                </div>
+                <h3 class="nk-news-box-item-title"></h3>
+                <div class="nk-news-box-item-text">
+                    <p></p>
+                </div>
+                <a href="{% url 'inicio' %}" class="nk-news-box-item-more">Leer Mas</a>
+                <div class="nk-news-box-item-date"><span class="fa fa-calendar"></span></div>
+            </div>
+        </div>
+    </div>
+</div>

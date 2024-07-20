@@ -1,0 +1,80 @@
+{% load static %}
+
+<h3 class="nk-decorated-h-2">
+    <span><span class="text-main-1">Noticias</span> Categorizadas</span>
+</h3>
+
+<div class="nk-gap"></div>
+
+<div class="nk-tabs">
+    <ul class="nav nav-tabs nav-tabs-fill" role="tablist">
+        {% for genre in genres_with_posts %}
+            {% if forloop.first %}
+            <li class="nav-item">
+                <a class="nav-link active" href="#tabs-1-{{forloop.counter}}" role="tab" data-toggle="tab">
+                    {{genre.genre__name}}
+                </a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="#tabs-1-{{forloop.counter}}" role="tab" data-toggle="tab">
+                    {{genre.genre__name}}
+                </a>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <div class="tab-content">
+        {% for post in tabbed_news %}
+            {% if forloop.first %}
+            <div role="tabpanel" class="tab-pane fade show active" id="tabs-1-{{forloop.counter}}">
+                <div class="nk-gap"></div>
+                <div class="nk-blog-post nk-blog-post-border-bottom">
+                    <a href="{% url 'ver_post' post.id %}" class="nk-post-img">
+                        <img src="{{post.image.url}}" class="img-tabbed-news" alt="{{post.title}}">
+                        <span class="nk-post-categories">
+                            <span class="bg-main-{{post.get_color_genre}}">{{post.genre.name}}</span>
+                        </span>
+                    </a>
+                    <div class="nk-gap-1"></div>
+                    <h2 class="nk-post-title h4">
+                        <a href="#">{{post.title}}</a>
+                    </h2>
+                    <div class="nk-post-date mt-10 mb-10">
+                        <span class="fa fa-calendar"></span> {{post.created|date:"F j, Y"}}
+                        <span class="fa fa-comments"></span> <a href="#">1 Comentarios</a>
+                    </div>
+                    <div class="nk-post-text">
+                        <p>{{post.get_content_latest_posts}}</p>
+                    </div>
+                </div>
+                <div class="nk-gap"></div>
+            </div>
+            {% else %}
+            <div role="tabpanel" class="tab-pane fade" id="tabs-1-{{forloop.counter}}">
+                <div class="nk-gap"></div>
+                <div class="nk-blog-post nk-blog-post-border-bottom">
+                    <a href="{% url 'ver_post' post.id %}" class="nk-post-img">
+                        <img src="{{post.image.url}}" class="img-tabbed-news" alt="{{post.title}}">
+                        <span class="nk-post-categories">
+                            <span class="bg-main-{{post.get_color_genre}}">{{post.genre.name}}</span>
+                        </span>
+                    </a>
+                    <div class="nk-gap-1"></div>
+                    <h2 class="nk-post-title h4">
+                        <a href="{% url 'ver_post' post.id %}">{{post.title}}</a>
+                    </h2>
+                    <div class="nk-post-date mt-10 mb-10">
+                        <span class="fa fa-calendar"></span> {{post.created|date:"F j, Y"}}
+                        <span class="fa fa-comments"></span> <a href="{% url 'ver_post' post.id %}">1 Comentarios</a>
+                    </div>
+                    <div class="nk-post-text">
+                        <p>{{post.get_content_latest_posts}}</p>
+                    </div>
+                </div>
+                <div class="nk-gap"></div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

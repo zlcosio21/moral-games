@@ -1,0 +1,33 @@
+<div class="nk-blog-grid">
+    <div class="row">
+        {% for post in main_latest_news %}
+        <div class="col-md-6 col-lg-3">
+            <div class="nk-blog-post">
+                <a href="{% url 'ver_post' post.id %}" class="nk-post-img">
+                    <img src="{{post.image.url}}" class="img-main-latest-news" alt="{{post.title}}">
+                    <span class="nk-post-comments-count">1</span>
+                    <span class="nk-post-categories">
+                        <span class="bg-main-{{post.get_color_genre}}">{{post.genre.name}}</span>
+                    </span>
+                </a>
+                <div class="nk-gap"></div>
+                <h2 class="nk-post-title h4">
+                    <a href="#">{{post.title}}</a>
+                </h2>
+                <div class="nk-post-text">
+                    <p>{{post.get_content_main_latest_news}}</p>
+                </div>
+                <div class="nk-gap"></div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{% url 'ver_post' post.id %}" class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1">
+                        Leer Mas
+                    </a>
+                    <div class="nk-post-date">
+                        <span class="fa fa-calendar"></span> {{post.created|date:"F j, Y"}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

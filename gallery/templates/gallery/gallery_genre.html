@@ -1,0 +1,65 @@
+{% extends "home/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<!-- START: Breadcrumbs -->
+<div class="nk-gap-1"></div>
+<div class="container">
+    <ul class="nk-breadcrumbs">
+        <li><a href="{% url 'inicio' %}">Inicio</a></li>
+        <li><span class="fa fa-angle-right"></span></li>
+        <li><span>Galeria</span></li>
+        <li><span class="fa fa-angle-right"></span></li>
+        <li><span>Genero</span></li>
+        <li><span>{{genre.name}}</span></li>
+    </ul>
+</div>
+<div class="nk-gap-1"></div>
+<!-- END: Breadcrumbs -->
+
+
+<div class="container">
+    <div class="row vertical-gap">
+        <div class="col-lg-8">
+
+            <!-- START: Latest Pictures -->
+            <div class="nk-gap"></div>
+
+            <div class="nk-popup-gallery">
+                {% include "gallery/pictures_genre.html" %}
+            </div>
+            <!-- END: Latest Pictures -->
+
+            <div class="nk-gap-2"></div>
+
+            <!-- START: Genres Galleries -->
+            <h2 class="nk-decorated-h-2 h3">
+                <span><span class="text-main-1">Otros</span> Generos</span>
+            </h2>
+
+            <div class="nk-gap"></div>
+
+            {% include "gallery/gallery_genre_list.html" %}
+            <!-- END: Genres Galleries -->
+
+        </div>
+
+        <!-- START: Sidebar -->
+        <div class="col-lg-4">
+            <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
+                {% include "home/sidebar.html" %}
+            </aside>
+        </div>
+        <!-- END: Sidebar -->
+
+    </div>
+</div>
+
+<div class="nk-gap-2"></div>
+
+<img class="nk-page-background-top" src="{% static 'assets/img/gallery.png' %}">
+
+{% endblock %}

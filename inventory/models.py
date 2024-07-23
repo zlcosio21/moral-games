@@ -77,7 +77,7 @@ class Videogame(Models):
     genre = models.ManyToManyField(Genre)
     platform = models.ManyToManyField(Platform)
     description = models.CharField(max_length=485, null=True)
-    comments = models.ManyToManyField("blog.comment")
+    comments = models.ManyToManyField("blog.comment", blank=True)
 
     def update_stock(self, quantity):
         self.quantity -= int(quantity)

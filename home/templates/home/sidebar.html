@@ -1,0 +1,114 @@
+<div class="nk-widget">
+    <div class="nk-widget-content">
+        <form action="{% url 'buscar' %}" method="post" role="form" class="nk-form nk-form-style-1">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Escribe Algo..." required>
+                <button class="nk-btn nk-btn-color-main-1" type="submit">
+                    <span class="ion-search"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="nk-widget nk-widget-highlighted">
+    <h4 class="nk-widget-title">
+        <span><span class="text-main-1">Menu</span> De Generos</span>
+    </h4>
+    <div class="nk-widget-content">
+        <ul class="nk-widget-categories">
+            {% if "ver_videojuego" in request.path %}
+                {% for genre in videogame.genre.all %}
+                    <li> <a href="{% url 'ver_genero_videojuego' genre %}">{{genre}}</a></li>
+                {% endfor %}
+            {% else %}
+                {% for genre in all_genres_sidebar %}
+                    <li><a href="{% url 'ver_genero_videojuego' genre %}">{{genre}}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<div class="nk-widget nk-widget-highlighted">
+    <form action="{% url 'buscar_por_precio' %}" method="post" role="form">
+        {% csrf_token %}
+        <h4 class="nk-widget-title"><span><span class="text-main-1">Filtrar</span> Precio</span></h4>
+        <div class="nk-widget-content">
+            <div class="nk-input-slider">
+                <input type="text" name="search" data-slider-min="0" data-slider-max="1800" data-slider-step="1"
+                    data-slider-value="[200, 1200]" data-slider-tooltip="hide">
+                <div class="nk-gap"></div>
+                <div>
+                    <div class="text-white mt-4 float-left">
+                        <strong class="text-main-1">$ <span class="nk-input-slider-value-0"></span></strong>
+                        -
+                        <strong class="text-main-1">$ <span class="nk-input-slider-value-1"></span></strong>
+                        <button type="submit" class="nk-btn nk-btn-rounded nk-btn-color-white float-right move-right">
+                            Aplicar
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="nk-widget nk-widget-highlighted">
+    <h4 class="nk-widget-title"><span><span class="text-main-1">Redes</span> Sociales</span></h4>
+    <div class="nk-widget-content">
+        <ul class="nk-social-links-3 nk-social-links-cols-4">
+            <li>
+                <a class="nk-social-github" href="https://github.com/zlcosio21">
+                    <span class="fab fa-github"></span>
+                </a>
+            </li>
+            <li>
+                <a class="nk-social-linkedin" href="https://www.linkedin.com/in/sebastian-ags">
+                    <span class="fab fa-linkedin"></span>
+                </a>
+            </li>
+            <li>
+                <a class="nk-social-rss" href="https://zlcosio21.me">
+                    <span class="fa fa-rss"></span>
+                </a>
+            </li>
+            <li>
+                <a class="nk-social-google-plus" href="mailto:sebas60621@gmail.com">
+                    <span class="fab fa-google-plus"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="nk-widget nk-widget-highlighted">
+    <h4 class="nk-widget-title"><span><span class="text-main-1">Mas</span> Populares</span></h4>
+    <div class="nk-widget-content">
+
+        {% for videogame in popular_videogames_sidebar %}
+        <div class="nk-widget-post">
+            <a href="{% url 'ver_videojuego' videogame.id %}" class="nk-post-image">
+                <img src="{{videogame.image.url}}" class="img-popular-videogame" alt="{{videogame.name}}">
+            </a>
+            <h3 class="nk-post-title">
+                <a href="{% url 'ver_videojuego' videogame.id %}">
+                    {{videogame.name}}
+                </a>
+            </h3>
+            <div class="nk-product-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="{{videogame.get_random_star}}"></i>
+                <i class="far fa-star"></i>
+            </div>
+            <div class="nk-product-price">$ {{videogame.price}}</div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>

@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from utils.messages import error_message
 from django.contrib import messages
 from cart.models import Cart
 
@@ -24,37 +25,51 @@ def email_exist(user, email):
     return User.objects.filter(email=email).exclude(pk=user.pk).exists()
 
 
-def len_errors(username, password):
-    return len(username) < 8 or len(password) < 8
+def username_len_error(username):
+    return len(username) < 8
+
+
+def password_len_error(password):
+    return len(password) < 8
 
 
 def different_passwords(password, password_confirm):
     return password != password_confirm
 
 
-def verify_register_errors(user, username, email, password, password_confirm):
-    return username_exist(user, username) or email_exist(user, email) or len_errors(username, password) or different_passwords(password, password_confirm)
-
-
 def register_errors(request, username, email, password, password_confirm):
     user = request.user
 
-    if username_exist(user, username):
-        messages.error(request, "El nombre de usuario ya está en uso.", extra_tags="username_exist_error")
+    username_exists = username_exist(user, username)
+    username_too_short = username_len_error(username)
+    email_already_used = email_exist(user, email)
+    password_too_short = password_len_error(password)
+    passwords_do_not_match = different_passwords(password, password_confirm)
+    
+    if username_exists:
+        error_message(request, "username_exist_error")
 
-    if len(username) < 8:
-        messages.error(request, "Debe contener mínimo 8 caracteres.", extra_tags="username_characters_error")
+    if username_too_short:
+        error_message(request, "username_characters_error")
 
-    if email_exist(user, email):
-        messages.error(request, "El correo ingresado ya está en uso.", extra_tags="email_exist_error")
+    if email_already_used:
+        error_message(request, "email_exist_error")
 
-    if len(password) < 8:
-        messages.error(request, "La contraseña debe contener mínimo 8 caracteres.", extra_tags="password_characters_error")
+    if password_too_short:
+        error_message(request, "password_characters_error")
 
-    if password != password_confirm:
-        messages.error(request, "Las contraseñas deben ser iguales. Ingrese nuevamente.", extra_tags="equals_passwords_error")
+    if passwords_do_not_match:
+        error_message(request, "equals_passwords_error")
 
-    return verify_register_errors(user, username, email, password, password_confirm)
+    errors = [
+        username_exists,
+        username_too_short,
+        email_already_used,
+        password_too_short,
+        passwords_do_not_match
+    ]
+
+    return any(errors)
 
 
 # Stock Videogames Validations
@@ -67,24 +82,25 @@ def insufficient_stock(videogame, quantity):
 
 
 def stock_errors(request, videogame, quantity=1):
+    stock_videogame_sold_out = stock_sold_out(videogame)
 
-    if stock_sold_out(videogame):
-        messages.error(request, f"Lo sentimos, actualmente esta entrega se encuentra agotada.", extra_tags="stock_sold_out")
+    if stock_videogame_sold_out:
+        messages.error(request, "Lo sentimos, actualmente esta entrega se encuentra agotada.", extra_tags="stock_sold_out")
 
-    if insufficient_stock(videogame, quantity):
-        messages.error(request, f"Solo se encuentran disponibles {videogame.cantidad} unidades del videojuego.", extra_tags="insufficient_stock")
-
-    return stock_sold_out(videogame) or insufficient_stock(videogame, quantity)
+    return stock_videogame_sold_out
 
 
 def stock_errors_cart(request, cart):
     for item in cart:
+        videogame = item.videogame
+        quantity = item.quantity
 
-        if stock_sold_out(item.videogame):
-            Cart.delete_videogame(request, item.videogame)
-            messages.error(request, f"Lastimosamente la entrega {item.videogame.name} se encuentra agotada, lo hemos eliminado de su carrito automaticamente.")
+        if stock_sold_out(videogame):
+            Cart.delete_videogame(request, videogame)
+            messages.error(request, f"Lastimosamente la entrega {videogame.name} se encuentra agotada, lo hemos eliminado de su carrito automáticamente.")
             return True
 
-        if insufficient_stock(item.videogame, item.quantity):
-            messages.error(request, f"Lastimosamente solo se encuentran disponibles {item.videogame.quantity} unidades de la entrega {item.videogame.nombre}.",)
+        if insufficient_stock(videogame, quantity):
+            messages.error(request, f"Lastimosamente solo se encuentran disponibles {videogame.quantity} unidades de la entrega {videogame.name}.") 
             return True
+

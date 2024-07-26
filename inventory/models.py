@@ -46,11 +46,13 @@ class Genre(Models):
         return cls.objects.get(id=id)
 
     @classmethod
-    def get_all_genres(cls, limit=0):
-        if limit > 0:
-            return cls.objects.all().order_by("?")[:limit]
+    def get_all_genres(cls, limit=1):
+        query = cls.objects.all().order_by("?")
 
-        return cls.objects.all().order_by("?")
+        if limit > 1:
+            return query[:limit]
+
+        return query
 
     @classmethod
     def get_random_genre(cls):
@@ -103,16 +105,19 @@ class Videogame(Models):
 
     @classmethod
     def get_pictures_by_genre(cls, genre, limit=1, all=False):
-        if all:
-            query = cls.objects.filter(genre=genre).values("name", "image", "description")
-            query = query.annotate(type=Value("videogame"))
+        query = cls.objects.filter(genre=genre).only('image', 'name', 'description')
+        query = query.annotate(type=Value("videogame"))
 
+        if all:
             return query
 
-        if limit > 1:
-            return cls.objects.filter(genre=genre).values("image").order_by("?")[:limit]
+        query = query.only("image").order_by("?")
 
-        return cls.objects.filter(genre=genre).values("image").order_by("?").first()
+        if limit > 1:
+            return query[:limit]
+
+        return query.first()
+
 
     @classmethod
     def get(cls, id):
@@ -120,35 +125,34 @@ class Videogame(Models):
 
     @classmethod
     def get_random_videogames(cls, limit=1):
+        query = cls.objects.all().order_by("?")
+
         if limit > 1:
-            return cls.objects.all().order_by("?")[:limit]
+            return query[:limit]
 
-        return cls.objects.all().order_by("?").first()
-
-    @classmethod
-    def get_random_name_videogames(cls, limit=1):
-        if limit > 1:
-            return cls.objects.all().values("name").order_by("?")[:limit]
-
-        return cls.objects.all().values("name").order_by("?").first()
+        return query.first()
 
     @classmethod
     def get_videogames_by_genre(cls, genre, limit=1):
-        if limit > 1:
-            return cls.objects.filter(genre=genre).order_by("?")[:limit]
+        query = cls.objects.filter(genre=genre).order_by("?")
 
-        return cls.objects.filter(genre=genre).order_by("?").first()
+        if limit > 1:
+            return query[:limit]
+
+        return query.first()
 
     @classmethod
     def get_videogames_by_platform(cls, platform, limit=1):
-        if limit > 1:
-            return cls.objects.filter(platform=platform).order_by("?")[:limit]
+        query = cls.objects.filter(platform=platform).order_by("?")
 
-        return cls.objects.filter(platform=platform).order_by("?").first()
+        if limit > 1:
+            return query[:limit]
+
+        return query.first()
 
     @classmethod
     def get_latest_pictures(cls):
-        query = cls.objects.all().values("name", "image", "description", "created")
+        query = cls.objects.all().only("name", "image", "description", "created")
         query = query.annotate(type=Value("videogame"))
 
         return query

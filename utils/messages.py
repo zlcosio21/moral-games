@@ -15,6 +15,11 @@ ERROR_MESSAGES = {
     "empty_cart": "Carrito vacío, primero agregue un videojuego al carrito.",
     "account_not_exist": "La cuenta no existe, ingrese los datos nuevamente.",
     "platform_not_exist": "La plataforma no existe, fue redirigido a otra plataforma.",
+    "username_exist_error": "El nombre de usuario ya está en uso.",
+    "username_characters_error": "Debe contener mínimo 8 caracteres.",
+    "email_exist_error": "El correo ingresado ya está en uso.",
+    "password_characters_error": "La contraseña debe contener mínimo 8 caracteres.",
+    "equals_passwords_error": "Las contraseñas deben ser iguales. Ingrese nuevamente."
 }
 
 

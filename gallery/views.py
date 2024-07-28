@@ -7,12 +7,10 @@ from blog.models import Post
 # Create your views here.
 def gallery(request):
     latest_pictures = get_latest_pictures(12)
-    videogames = Videogame.get_random_name_videogames(4)
     all_genres = Genre.get_all_genres(4)
 
     context = {
         "latest_pictures": latest_pictures,
-        "videogames": videogames,
         "all_genres": all_genres,
     }
 

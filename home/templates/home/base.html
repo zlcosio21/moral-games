@@ -80,9 +80,9 @@
               </a>
             </li>
             <li>
-              <span class="nk-cart-toggle">
-                <a href="{% url 'carrito' %}" class="fa fa-shopping-cart"></a>
-              </span>
+              <a href="{% url 'carrito' %}" >
+                <span class="fa fa-shopping-cart"></span>
+              </a>
             </li>
             {% else %}
             <li>
@@ -91,9 +91,9 @@
               </a>
             </li>
             <li>
-              <span class="nk-cart-toggle">
-                <a href="{% url 'carrito' %}" class="fa fa-shopping-cart"></a>
-              </span>
+              <a href="#" data-toggle="modal" data-target="#modalLogin">
+                <span class="fa fa-shopping-cart"></span>
+              </a>
             </li>
             {% endif %}
           </ul>
@@ -132,13 +132,12 @@
   </header>
 
 
-
   <!-- START: Navbar Mobile -->
   <div id="nk-nav-mobile" class="nk-navbar nk-navbar-side nk-navbar-right-side nk-navbar-overlay-content d-lg-none">
     <div class="nano">
       <div class="nano-content">
         <a href="{% url 'inicio' %}" class="nk-nav-logo">
-          <img src="{% static 'assets/imag/logo.png' %}" alt="" width="120">
+          <img src="{% static 'assets/img/logo.png' %}" alt="" width="120">
         </a>
         <div class="nk-navbar-mobile-content">
           <ul class="nk-nav">

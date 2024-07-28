@@ -1,5 +1,5 @@
-from moral_games.base_models import Models
 from django.contrib.auth.models import User
+from moral_games.base_models import Models
 from inventory.models import Videogame
 from django.db import models
 
@@ -20,16 +20,6 @@ class Cart(Models):
     @classmethod
     def get_user_cart(cls, request):
         return cls.objects.filter(user=request.user)
-
-    @classmethod
-    def get_videogames_cart(cls, request, limit=0):
-        if not cls.exists(request):
-            return Videogame.get_random_videogames(2)
-
-        if limit > 0:
-            return cls.objects.filter(user=request.user).order_by("?")[:limit]
-
-        return cls.objects.all().order_by("?")[:2]
 
     @staticmethod
     def get_total_user_cart(cart):
@@ -67,6 +57,7 @@ class Cart(Models):
 
     def __str__(self):
         return f"Usuario {self.user} - Producto {self.videogame.name} - {self.quantity} unidades"
+
 
 class ShoppingCartHistory(Models):
     id = models.AutoField(primary_key=True)

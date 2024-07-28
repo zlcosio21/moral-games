@@ -36,7 +36,7 @@ def login_user(request):
 
     if user == None:
         error_message(request, "account_not_exist")
-        return redirect("inicio_sesion")
+        return redirect("inicio")
 
     login(request, user)
 

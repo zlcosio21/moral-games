@@ -6,7 +6,8 @@
                 <img src="{{videogame.image.url}}" class="img-related-videogame" alt="{{videogame.name}}">
             </a>
             <div class="nk-product-cont">
-                <h3 class="nk-product-title h5"><a href="store-product.html">{{videogame.name}}</a>
+                <h3 class="nk-product-title h5">
+                    <a href="{% url 'ver_videojuego' videogame.id %}">{{videogame.name}}</a>
                 </h3>
                 <div class="nk-gap-1"></div>
                 <div class="nk-product-rating" data-rating="3">

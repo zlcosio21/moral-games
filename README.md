@@ -225,6 +225,12 @@ Moral Games is an online platform that allows users to explore, purchase, and en
        AWS_STORAGE_BUCKET_NAME="bucket_name"
        ```
 
+   - Send static files to bucket S3:
+
+     ```sh
+     python manage.py collectstatic
+     ```
+
    - Configure Nginx:
 
      ```sh
@@ -518,6 +524,12 @@ Moral Games es una plataforma en línea que permite a los usuarios explorar, com
        AWS_SECRET_ACCESS_KEY="clave_de_acceso_secreta"
        AWS_STORAGE_BUCKET_NAME="nombre_del_bucket"
        ```
+
+   - Enviar archivos estaticos al bucket de S3:
+
+     ```sh
+     python manage.py collectstatic
+     ```
 
    - Configurar Nginx:
 

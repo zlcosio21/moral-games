@@ -43,10 +43,12 @@ class Post(Models):
 
     @classmethod
     def get_random_posts(cls, limit=1):
-        if limit > 1:
-            return cls.objects.all().order_by("?")[:limit]
+        query = cls.objects.all().order_by("?")
 
-        return cls.objects.all().order_by("?").first()
+        if limit > 1:
+            return query[:limit]
+
+        return query.first()
 
     @classmethod
     def get_all_genres_post(cls):
@@ -60,20 +62,22 @@ class Post(Models):
 
     @classmethod
     def get_pictures_by_genre(cls, genre, limit=1, all=False):
-        if all:
-            query = cls.objects.filter(genre=genre).values("title", "image", "content")
-            query = query.annotate(type=Value("post"))
+        query = cls.objects.filter(genre=genre).only("title", "image", "content")
+        query = query.annotate(type=Value("post"))
 
+        if all:
             return query
 
-        if limit > 1:
-            return cls.objects.filter(genre=genre).values("image").order_by("?")[:limit]
+        query = query.only("image").order_by("?")
 
-        return cls.objects.filter(genre=genre).values("image").order_by("?").first()
+        if limit > 1:
+            return query[:limit]
+
+        return query.first()
 
     @classmethod
     def get_latest_pictures(cls):
-        query = cls.objects.all().values("title", "image", "content", "created")
+        query = cls.objects.all().only("title", "image", "content", "created")
         query = query.annotate(type=Value("post"))
 
         return query

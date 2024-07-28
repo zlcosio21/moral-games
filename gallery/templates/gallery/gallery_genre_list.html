@@ -3,7 +3,7 @@
     <div class="col-md-6">
         <div class="nk-gallery-item-group">
             <a href="{% url 'ver_galeria_genero' genre.id %}" class="nk-gallery-item">
-                <img src="/media/{{genre.get_random_picture_of_the_genre.image}}" id="img-genre-gallerie">
+                <img src="{{genre.get_random_picture_of_the_genre.image.url}}" id="img-genre-gallerie">
                 <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
             </a>
             <div class="nk-gallery-item-description">

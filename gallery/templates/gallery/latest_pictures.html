@@ -2,7 +2,7 @@
     {% for picture in latest_pictures %}
     <div class="col-lg-4 col-md-6">
         <div class="nk-gallery-item-box">
-            <a href="/media/{{ picture.image }}" class="nk-gallery-item"
+            <a href="{{picture.image.url}}" class="nk-gallery-item"
                 {% if picture.type == 'videogame' %}
                     data-size="500x720"
                 {% else %}
@@ -11,7 +11,7 @@
                 <div class="nk-gallery-item-overlay">
                     <span class="ion-eye"></span>
                 </div>
-                <img src="/media/{{ picture.image }}" loading="lazy" class="img-latest-pictures" alt="{{ picture.image }}">
+                <img src="{{picture.image.url}}" loading="lazy" class="img-latest-pictures" alt="{{ picture.image }}">
             </a>
             <div class="nk-gallery-item-description">
                 <h4>{{ picture.title }}</h4>

@@ -9,7 +9,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "PASSWORD_DJANGO"
+SECRET_KEY = "eb880329-8a12-41bd-90a0-535e8e4eab53"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
